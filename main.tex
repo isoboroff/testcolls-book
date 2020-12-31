@@ -1,0 +1,639 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% How to use writeLaTeX: 
+%
+% You edit the source code here on the left, and the preview on the
+% right shows you the result within a few seconds.
+%
+% Bookmark this page and share the URL with your co-authors. They can
+% edit at the same time!
+%
+% You can upload figures, bibliographies, custom classes and
+% styles using the files menu.
+%
+% If you're new to LaTeX, the wikibook is a great place to start:
+% http://en.wikibooks.org/wiki/LaTeX
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[nobib]{tufte-book}
+
+\hypersetup{colorlinks}% uncomment this line if you prefer colored hyperlinks (e.g., for onscreen viewing)
+
+%%
+% If they're installed, use Bergamo and Chantilly from www.fontsite.com.
+% They're clones of Bembo and Gill Sans, respectively.
+\IfFileExists{bergamo.sty}{\usepackage[osf]{bergamo}}{}% Bembo
+\IfFileExists{chantill.sty}{\usepackage{chantill}}{}% Gill Sans
+
+%%
+% Book metadata
+\title{Building Test Collections for\\
+Information Retrieval Experiments}
+\author[Ian Soboroff]{Ian M. Soboroff}
+
+
+%\usepackage{microtype}
+\usepackage{hyphenat}
+\usepackage[utf8]{inputenc}
+\usepackage[
+  style=verbose,
+  autocite=footnote,
+  backend=biber,
+  url=false,
+  doi=false,
+  eprint=false,
+  isbn=false
+]{biblatex}
+\addbibresource{refs.bib}
+%%
+% For nicely typeset tabular material
+\usepackage{booktabs}
+
+%%
+% For graphics / images
+\usepackage{graphicx}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+\graphicspath{{graphics/}}
+
+% The fancyvrb package lets us customize the formatting of verbatim
+% environments.  We use a slightly smaller font.
+\usepackage{fancyvrb}
+\fvset{fontsize=\normalsize}
+
+\usepackage{url}
+
+%%
+% Prints argument within hanging parentheses (i.e., parentheses that take
+% up no horizontal space).  Useful in tabular environments.
+\newcommand{\hangp}[1]{\makebox[0pt][r]{(}#1\makebox[0pt][l]{)}}
+
+%%
+% Prints an asterisk that takes up no horizontal space.
+% Useful in tabular environments.
+\newcommand{\hangstar}{\makebox[0pt][l]{*}}
+
+%%
+% Prints a trailing space in a smart way.
+\usepackage{xspace}
+
+% Prints an epigraph and speaker in sans serif, all-caps type.
+% Oh god no.  I hate sans all-caps, it's unreadable.
+\newcommand{\openepigraph}[2]{%
+  %\sffamily\fontsize{14}{16}\selectfont
+  \begin{fullwidth}
+  \Large
+  %\begin{doublespace}
+  \noindent{#1}\\% epigraph
+  \noindent{\itshape --- #2}% author
+  %\end{doublespace}
+  \end{fullwidth}
+}
+
+% Inserts a blank page
+\newcommand{\blankpage}{\newpage\hbox{}\thispagestyle{empty}\newpage}
+
+\usepackage{units}
+
+% Typesets the font size, leading, and measure in the form of 10/12x26 pc.
+\newcommand{\measure}[3]{#1/#2$\times$\unit[#3]{pc}}
+
+% Generates the index
+\usepackage{makeidx}
+\makeindex
+
+% Creative Commons icons
+\usepackage{ccicons}
+
+\begin{document}
+
+% Front matter
+\frontmatter
+
+% r.1 blank page
+% \blankpage
+
+% v.2 epigraphs
+\newpage\thispagestyle{empty}
+\openepigraph{%
+I often say that when you can measure what you are speaking about, and express it in numbers, you know something about it; but when you cannot measure it, when you cannot express it in numbers, your knowledge is of a meagre and unsatisfactory kind; it may be the beginning of knowledge, but you have scarcely, in your thoughts, advanced to the stage of science, whatever the matter may be.
+}{William Thompson, Lord Kelvin%, {\itshape Design, Form, and Chaos}
+}
+\vfill
+\openepigraph{%
+... in America at this time there were a number of groups actively engaged in proposing new systems and methods. It was clear
+that claims were being made by proponents which, while possibly correct, could not be considered proven by results; just as clearly many of the arguments being used by opponents of the systems were equally unproven or trivial. It seemed desirable that a serious investigation should be made so that opposing claims could be evaluated, and by this time we had definite views as to how such an investigation could be carried out.
+}{Cyril Cleverdon, preface to the {\itshape Report on the First Stage of an Investigation into the Comparative Efficiency of Indexing Systems}}
+\vfill
+\openepigraph{%
+It is easy to store large masses of information, but storage in itself is of no value unless systems are designed that make selected items available to interested users.
+}{Gerard Salton (as quoted in his obituary, New York Times, Sep 8, 1995)}
+
+
+% r.3 full title page
+\maketitle
+
+
+% v.4 copyright page
+\newpage
+\begin{fullwidth}
+~\vfill
+\thispagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{\baselineskip}
+Copyright \copyright\ \the\year\ \thanklessauthor
+
+\par{\ccbyncsa~This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License, \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}}
+
+\par\smallcaps{tufte-latex.googlecode.com}
+
+\par\textit{First printing, not yet}
+
+\par\textit{This book mentions certain specific companies, products, or services.  These mentions are in no way intended to imply endorsement or recommendation of the product, company, or service by the author or his employer.}
+\end{fullwidth}
+
+% r.5 contents
+\setcounter{tocdepth}{1}
+\tableofcontents
+
+% \listoffigures
+
+% \listoftables
+
+% r.7 dedication
+\cleardoublepage
+~\vfill
+\begin{doublespace}
+\noindent\fontsize{18}{22}\selectfont\itshape
+\nohyphenation
+There will be a dedication here, when there is something worth dedicating.
+\end{doublespace}
+\vfill
+\vfill
+
+A note on the formatting, which uses the {\tt tufte-book} \LaTeX class.  I think this class makes especially beautiful books, but it has one advantage that really strikes a chord with me: ``footnotes'', small figures and citations are on the sidebar of the page.  I hate having to flip back and forth to a bibliography to see if I recognize a citation.  And those that know me I'm sure know that I never let a side comment pass unsaid; this format has a place for that.  I certainly don't think my writing or knowledge rises to the level of Edward Tufte, and hopefully if he ever reads this he'll forgive any apparent hubris.
+
+A note on first-person pronouns.  I've noticed that I use the word ``we'' in two senses. First, and most commonly, I use it as a generic inclusive term, ``we, the practitioners'', which includes you, the reader (I hope!).  Second, I use ``we'' to indicate the Retrieval Group at NIST, to indicate a practice or method used in our evaluations but perhaps not published elsewhere.  I hope that the distinction is clear from context.
+
+% r.9 introduction
+\cleardoublepage
+\chapter*{Introduction}
+
+This book grew out of a tutorial on building test collections that I taught at ACM SIGIR 2017 and 2015.  While there are excellent books and resources out there on evaluation and experimentation in information retrieval (IR), books, chapters and monopgraphs about using test collections, multiple venues for building test collections as part of a community evaluation task, and a growing literature on comparing test collections, measuring the qualities of test collections, and comparing offline and online experiments, no one had actually written down the mechanics of designing and building a test collection.
+
+As a result of a number of papers on minimizing the number of relevance judgments in a collection and emerging best practices on crowdsourcing, I had an idea that anyone should be able to build their own test collection, use it for research, and have that research be publishable at SIGIR.  SIGIR is notoriously stodgy about wanting researchers to perform experiments on established test collections, but the fact of the matter is that even with TREC, NTCIR, CLEF, and FIRE, there are bound to be fewer test collections created than research questions wanting test collections.  If a graduate student is working on a problem that needs a test collection, their current best option is to coordinate a task at one of the evaluation workshop series.  But this takes a lot of time and requires community involvement, which is hard to get for brand new problems.  If everyone knew how to build test collections, and we had good methods for measuring the quality of those collections, then all of a sudden we could have all the collections we need.
+
+Some might argue that the age of test collection research in information retrieval is on the wane.  I'm not sure about that, since the current best-understood alternative, A/B testing, requires starting a search product and growing it into something big enough to measure. In any event the problems of building datasets are not unique to information retrieval, it's just that the IR community has been working on this problem the longest.  Perhaps the experiences and techniques in this book will be found to be useful in all the other domains of computer science that have recently found themselves in urgent and exciting need of purpose-designed data collections curated by communities with a common goal of moving the state of the art for specific algorithms or problems.
+
+There are a great many people who I must thank for giving me the knowledge and experience to write this book, none more so than Donna Harman and Ellen Voorhees of NIST.  Donna hired me after graduate school to join her group at NIST, and she and Ellen allowed me to get involved in the nitty-gritty details of several TREC tracks right from the beginning.  Everything I know about building test collections was learned on that workbench, and I will be forever grateful to them for that opportunity.
+
+I would also thank those of you who read drafts and early versions of this book, and provided many helpful comments.  Of course, that hasn't happened yet, so I'm just thanking you now for letting me thank you later.
+
+Against the danger of leaving someone out, I will lastly thank the extended ACM SIGIR community.  SIGIR knows that they need data to do their research, and they also know from hard experience that no one will give it to them, but rather they need to build it for themselves.  And they did, by working together.  That environment of openness to collaboration and sharing made the TREC program not only possible but successful.  Evaluation workshops thrive, producing new datasets every year, with little or no funding,\footnote{To be fair, yes, we at NIST are paid to run TREC, and this situation exists to some degree in other forums, but we at NIST are a very small part of TREC's success compared to the researchers that participate, usually without funding.} but largely due to the volunteer energy of researchers driven to make things better.
+%%
+% Start the main matter (normal chapters)
+\mainmatter
+
+\chapter{What is a test collection?}
+
+\section{Test collection basics}
+
+A test collection has five parts:
+\begin{enumerate}
+    \item a set of {\it documents}, things to be searched,
+    \item a set of {\it topics} representing search goals or information needs,
+    \item the {\it relevance judgments}, a mapping from topics to documents (or parts of documents) representing the ``answer key'',
+    \item one or more {\it metrics} that quantify success and failure for the user, and
+    \item a {\it task} that sets context for the above and motivates the metrics.
+\end{enumerate}
+
+The first three elements, documents, topics, and relevance judgments, are familiar to information retrieval practitioners, and certainly represent the critical parts of a test collection.  To this I add metrics, because often test collections as built may only support certain metrics, and those metrics only at certain measurement resolution, and these things are important properties of the test collection.  I also add the task, because, as I describe in the next chapter, the task explains all the choices made for the other pieces: what the user is trying to do, where the documents come from, the environment or activity out of which the topics arise, the definition of relevance, the notion of user success or task accomplishment, and the choice of metrics that quantify that success (or failure).
+
+In information retrieval, ``documents'' is the historical jargon term for ``the things we're searching among''.  Documents might be journal abstracts, or news articles, or tweets, or web pages, or blog posts, or online forum posts, or books, or audio recordings, or video clips.  Documents have metadata and content, and the content is chiefly intended for consumption by human beings.  The field of information retrieval exists because we have so much content now, we need to use computers to keep track of the content even though computers can't understand the content or our need to search it.
+
+The document might not be the unit of retrieval, the thing that the IR system returns to the user in response to the query.  The system might return snippets, or summaries, or metadata records, or keywords in context, or links, or collections of documents, or indeed pretty much anything.  However, the logical unit of the collection of things were are searching within is called a ``document''.
+
+A topic is a thing that a user is searching for.  It represents an information need that drives the user to do a search.  The TREC collections instituted the wide practice of explicitly differentiating the topic from the query, which is the text that the user types into the search box. The query is a lossy articulation of the information need; the user translates their need into something they can communicate to the IR system and that they believe will yield useful results.
+
+Relevance judgments are the answer key.  When confronted with the user and their information need, the system should retrieve the things in the relevance judgments.  The criteria for being ``relevant'' is complex, and actually emerges from the definition of the task.  I will discuss this in depth in a later chapter, but suffice for now to say that ``relevance'' means what the user wanted to see.
+
+When I talk about test collections, I mean chiefly those I have been involved in building as part of the Text Retrieval Conference (TREC),\footnote{\url{http://trec.nist.gov/}} and others built following similar practices.  There are a few unifying themes among these test collections.  They are built around problems in information retrieval, so broadly speaking they are concerned with finding natural language objects like news articles or web pages, in response to ill-defined queries, posed by a user who is searching in order to accomplish a task.  The test collection does not define these notions exhaustively, but attempts to document them as reasonably as can be done, with a recognition that relevance and task accomplishment are intuitive concepts held by the user and not known to the system generally.  There is a mechanical setup that joins the system, the topics, the documents, and the relevance judgments into an experimental procedure, and this procedure to some extent is baked into the test collection.  The test collection models a real problem faced by real users trying to use real systems to solve real tasks.
+
+These themes differentiate IR test collections somewhat from datasets used for measuring classifiers or detection systems, where correctness might have a more straightforwardly recognizable or articulated definition.  Inherent in IR is the fact that people disagree about what documents are about, whether they are relevant, whether they are useful, and what they might be used for.  Nevertheless, it's my experience that even in ``ordinary'' datasets there are always corner cases of class label assignment where it's not completely clear how or why a certain label got assigned.  The further the notion of class membership is explored, the more it starts to look like relevance.  As such, while some of the details in this book might be specific to IR test collections, I think much of it is applicable to datasets of any kind.
+
+\section{History}
+
+TREC and its offspring are large community-driven evaluation activities out of which come test collections, a physical conference, a number of publications, and the seeds for future research.  Nearly all modern test collections are built in one of these forums.  In the distant past (prior to 1991), individual research teams or small consortia built test collections, but the principles and techniques used in building them were still in their infancy.
+
+While it wasn't the first test collection ever, the first test collections that most people know about are the Cranfield collections.  Built by Cyril Cleverdon at the Cranfield College of Aeronautics (now Cranfield University) in England, the goal was to measure the effectiveness of different ways of indexing documents for search.
+
+PLACEHOLDER Donna's upcoming book details the history of test collections in wonderful detail.
+
+PLACEHOLDER Karen's ideal test collection.  It was a many-splendored thing, but one part that was in there was pooling.
+
+In 1991, NIST started the Text Retrieval Conference, supported by the DARPA TIPSTER program which had a need for a large IR test collection.\autocite{harman_darpa_1992}  Large in 1991 meant more than a gigabyte, a half-million documents or more.  Donna Harman approached colleagues in the SIGIR community to gauge interest in building the collection together, by running existing systems and using pooling as described in the ``Ideal Test Collection'' paper.
+
+By 1995 it was beginning to be broadly understood that search was a critical technology, that it could actually be made to work at scale, and that scale seemed to be coming in the form of the burgeoning World-Wide Web.  The success of TREC and the early success of Web search engines helped spur an expansion in the kinds of search researchers wanted to investigate.  We needed web test collections, obviously, but it also seemed right to revisit old problems (patents, OCR, structured documents) as well as new ones being dreamt up every year.  TREC initiated ``tracks'' to allow the community to build more than one or two test collections per year.
+
+At the same time, test collection building was going world-wide.  CLEF, the Cross-Language Evaluation Forum (now the Conference and Labs of the Evaluation Forum),\footnote{\url{http://www.clef-initiative.eu/}} and NTCIR, the NTT Test Collections for Information Retrieval (now the NII Testbeds and Community for Information Access Research)\footnote{\url{http://research.nii.ac.jp/ntcir/}} spun off from TREC to explore monolingual and cross-lingual search in European and Asian languages respectively.  Soon enough NTCIR and CLEF had tracks of their own, and new efforts were beginning elsewhere as communities realized the power of datasets built as a common good. Many of these efforts adopted practices pioneered in TREC, but they also encountered their own problems needing their own solutions.  This book is an attempt to collect that knowledge and experience back into a single reference.
+
+
+\section{Current test collection development}
+
+I don't remember right now what I thought went into this section.
+
+\section{Relationship to online measurements}
+
+In contrast to a laboratory experiment on a test collection, we can study users in a structured experimental setting, or we can measure search effectiveness directly, online, as the users engage in the task.  Each methodology is essential in understanding the effectiveness of a search engine.
+
+User studies observe behavior in a strongly controlled setting.  For example, two variations on a ranking algorithm can be applied as experimental conditions.  Users are asked to perform a task, and observations of the user interaction are made such that the experimenter can compare the experimental conditions --- following our example, whether one ranker or the other has an effect on the number of relevant items the user could find in a fixed amount of time.  In 2009, Diane Kelly published the definitive monograph on the history and practice of user studies in information retrieval.\autocite{kelly_methods_2009}
+
+Web-based search systems made it possible for the provider of the search engine to collect observations of user behavior: what was typed, what was clicked, time spent between events, backtracking actions, scrolling actions, and more.  Early successes and failures of raw click-through rates led researchers to eye-tracking studies and more complex metrics.  As of this writing, the methodologies of interleaving and A/B testing are the most strongly developed for conducting online experiments.  Experiences in the TREC Open Search track suggest that the effectiveness of interleaving is limited by the traffic on the site.  This might present something of a chicken-and-egg problem for online experiments: no one will use a poor search tool if a better one exists, but you can't make the poor tool better through online experiments unless people are using it.
+
+In 2001, Andrew Turpin and Bill Hersh published a paper with a title that was a sure-fire argument starter: ``Why Batch and User Evaluations Do Not Give The Same Results''.\autocite{turpin_why_2001}   The paper amply illustrates the complexity in aligning offline and online experiments and has been taken by some as a critique of the test collection methodology.  I would prefer to ask a better question: when batch experiments, user studies, and online experiments do not agree, can we identify the source of the disagreement?  In Turpin and Hersh's paper, they found that while systems with better mean average precision did help actual users, users with the poorer system were still able to complete tasks because most users would issue multiple queries rather than look deeply into a ranking.  This points to a mismatch between the batch metric (MAP) and the online metric (task completion), as well as a mismatch in the experimental setup.  
+
+Static datasets, online experiments, and user studies are different tools that let us observe search effectiveness from different perspectives.  A modern approach to measurement uses all available methods as hypothesis generators and testers to interrogate the system.  When experiments disagree, it may point to experimental differences or to faulty assumptions or to mismatches in testing or something else, and we can conduct further experiments to confirm these outcomes.  Some experiments are best run with static data, some with user studies, and some with online experimental methods.
+
+So what are static test collections useful for?  Test collections can prove very useful for initial system development, for rapidly tuning parameters, for failure analysis, and for iterative experimentation.  Test collection experiments are quick to run, are significantly less resource-intensive than user studies, and do not require a mature system.  There are also pedagogical advantages to static data collections.  But as Hersh and Turpin showed, if your only experiments are with test collections, you can't say very much about true user effectiveness.
+
+\chapter{Defining the task}
+
+\section{What is a task?}
+
+The task is, put simply, what the person\footnote{There's an old saw that there are only two industries that call their customers ``users''. Nevertheless we use the terms ``person'' and ``user'' interchangeably in this book.} using the search engine is trying to accomplish.  No one (well, almost no one) does searches for their own sake or entertainment, or because they have nothing better to do.  Searching is something that people do on the way to accomplishing some goal.  There might be a simple goal, or there might be a very complicated problem with lots of intermediary goals.  Searching is something done along the way, and this is why we designers of search tools need to be mindful: don't waste the person's time, and if at all possible make the use of time valuable.
+
+PLACEHOLDER I know Karen always talked about task, and I was reminded today because the New York Times published a ``belated obit'' for her in their ongoing series of obits for women you should have heard about.  (The article mentions that the Times did not publish an obituary when she died, although it did do so when her husband Roger Needham died.)  Anyway, Karen needs to go in this chapter, maybe a few times.
+
+It's critical that the notion of task be read from the user's perspective.  Ranking is not a task, nor is query understanding, nor is lemmatization; these are things that systems must do in order to support the user's task.  Particularly with datasets and shared tasks and evaluation conferences, the word ``task'' gets abused quite a lot.  I'm sure I'll violate this in a few paragraphs, but when I use ``task'' with respect to building a test collection, I mean the user's task.
+
+The user's task is always abstracted somewhat from reality in setting up an experiment or building a test collection.  Abstraction is good, because it allows us to make explicit assumptions as we take a task from the ideal user setting to an experimental one.  At any point where we observe our task deviating from what people seem to do in common practice, we can articulate that as an assumption of the task abstraction.
+
+Now, sometimes as researchers we are trying to invent something completely new, and it doesn't make sense to abstract from an actual user's real-world task because people don't do the real-world task yet.  They will once I invent this new thing and it takes over the world, but for now people must be content to hit nails with poor hammers.  When we are inventing a completely new information access technology, we have to imagine how it may be used.  Once again the task abstraction is where we articulate what we imagine people would actually do with the technology, and state our assumptions for purposes of experimenting with algorithms that will eventually make up that technology.
+
+An example of the evolution of a task is what's now called ``semantic search''.  Early in the evolution of web search engines people typed words into the search box with the expectation that the system would return web pages that contained those words.  At a certain point in the process of the web moving from a geek thing to an indispensable and universal tool familiar to nearly everyone, we started to objectify web pages: a web page could be spoken about interchangeably as a representation of something in the real world.  A company's web page was the digital representation of that company on the web.  This idea became concretized in the expression, ``things not strings'';\autocite{singhal_introducing_2012} people weren't searching for words, they were searching for things, places, people, ideas, products.  A web page describing a product, for example, was fundamentally different from the official web page for that product.  In retrospect, this seems obvious, but the implications of this perceptual pivot affect crawling, ranking, snippet generation, and nearly every aspect of the search algorithm.  The task changed.
+
+The articulation of the task gives the setting for information needs, the origin and structure of documents being searched, and the background and urgency level of the user.  It motivates the choices of document set and metrics.  It shapes the structure of the experiment we expect to perform with the test collection: what does the system know at what time, how does the query arrive, what is the response format.
+
+\section{Historical perspective}
+
+Putting the task at the center of how we think of the test collection is a very modern perspective.\footnote{At least, I'm not aware of other books prior to this one that take this stance.}  In the Cranfield tests~\autocite{cleverdon_chapter_1966} the initial interest was in improving the efficiency of manual indexing, that is, people assigning categories and subject keywords to documents, without considering the goals or needs of searchers.  After their initial experiments, Cleverdon rapidly realized that any indexing scheme would affect search effectiveness in terms of recall and precision, and thus closer attention was paid to the questions asked by searchers.
+
+To elicit those questions, Cleverdon followed this procedure.  He selected a group of research articles in aeronatucial engineering, which had been selected as the domain of the test collection.  For each article, they wrote to the author and asked them to:
+\begin{enumerate}
+    \item state the basic underlying problem that drove the research described in the paper, {\em as a search task}, imagining giving that query to an ``information searvice'', that is, a librarian;
+    \item give up to four more supplementary questions that came out of the research; and
+    \item grade up to ten of the citations in the paper as to whether they were relevant to those questions.
+\end{enumerate}
+
+This was a process of back-fitting queries to documents.  Back-fitting is a problematic approach because the queries are inherently tuned to a specific document, whereas in informational searches the searcher is usually looking for a new document.  The result is that the collection predicts high precision than you would see from real users. 
+Cleverdon had to take an approach that started from documents, because he reasoned that all documents in the collection needed to be reviewed with respect to each query, and it was infeasible to manually assess very many documents in total.
+To overcome the precision bias, Cleverdon asked the authors to frame the paper's research questions as searches, and then to decide if the citations were relevant or not to the questions.
+
+So through an elicitation process, a task was developed, which was that a researcher would be asking questions of the literature in the course of planning an experiment or course of research.  The difficulty of tying questions closely to documents was not fully understood until much later, when test collections were larger and queries could come from external sources, but the core task, recall-oriented search for relevant research papers, remained.
+
+In their report on the `ideal' test collection, Sparch Jones and Van Rijsbergen considered search modalities, goals, and types of users.  They identified four search search modalities: ``retrospective searching'', which was one request posed against a static document collection; ``SDI [selective dissemination of information] searching'', where a request is repeated against successive sets of documents; ``iterative searching'', where the request is modified between multiple searches based on the results; and ``multifarious searching'' which was thought of as a mixture of the above.\autocite{sparck_jones_report_1975}  I call these ``modalities'' rather than tasks because they are purely mechanical search procedures.  Alongside these they named, but did not specify, several abstract tasks: data retrieval, fact retrieval, document retrieval, and computer-aided instruction.  Requests could be verbal or start from a source document (which may or may not be relevant to the request).  Lastly, the notion of a "request" centered on a single information need, which might itself result in a number of search queries depending on the capabilities of the system.
+
+\section{Tasks in test collections}
+
+The classic task in test collections is the so-called ``adhoc search'' task.\footnote{Whether you spell it ``adhoc'' or ``ad hoc'' is mostly a religious issue, or alternatively depends on whether you studied Latin in school.  As the term has graduated into information retrieval jargon, I use the single-word form to emphasize its jargon sense.}  In an adhoc search, the user provides a single query and the system returns a single ranked list of documents.  ``Adhoc'' in its initial use in TREC was meant that the query arrives at the system at some arbitrary point with no broader context or history, as opposed to ``routing'', a scenario where the user has a standing query and documents are {\em routed} to users with matching information needs.
+
+Note that we have defined an interaction, not a task, and done so quite narrowly, beginning with the user typing and ending with a display of results.  In fact, there are a number of user tasks that contain an adhoc search, and in order to fill out the task and make something measurable, we need to step back and define that encompassing task.
+
+The typical TREC adhoc task is perhaps more properly called ``informational search''.  The user has a general topic they are interested in, or a question in mind that they would like to discover information about.  The user is interested in finding any and all information relevant to that topic; even duplicate information is useful because of its provenance or prevalence or other features.  In order to conduct the search, the user formulates a query and issues it to the search engine, which returns a single ranked list of results.  The user will then read the result documents in rank order until they have found everything they are after.  The user has a goal of producing a report that describes and summarizes their findings.
+
+Let's take another step back from the task and imagine an actual user with an informational search need.  They have this need from an interest they have, or a goal they want to accomplish, or a job they are trying to perform.  Because the need has origins in the cognitive state and goals of the user, it has a broader context: the user may have background knowledge, or an understanding of the subject area, or familiarity with a related information need, or experience with a different information need related to this one.  The present information need might be an instance of a much larger search activity: we can easily imagine a financial analyst following a company or an industry segment, who is broadly interested in and experienced with information relating to that company or industry segment.  They still conduct searches, not only to find new things, but to validate and support knowledge they already have.
+
+Because of that context, certain kinds of relevant information are more useful than others.  Information the user already knows is different than information that is new.  Because the user has an existing cognitive structure for understanding the topic, new information may even necessitate reorganizing that structure, or at the very least it could inspire further searches. Even when tracking duplicate information, the first instance is of a different sort of utility to the user than the subsequent instances.  The costs of consuming those instances differs as well.  Some relevant mentions are minor or parenthetical.  Other documents might give an exhaustive treatment of the user's topic.  A document may help the user understand their information need differently than they did before they issued the query; they might realize they should be searching differently, or even that they should pause this search in order to acquire more background information.
+
+As the user is reading, their notion of relevance changes.  Again, the example of tracking duplicate information is germane here, but in any event the user is learning as they read, no matter the form the relevant information takes.  User's judgments of relevance are modified by encounters with {\em irrelevant} information: often there are corner cases of relevance where the user has to make a decision about whether to keep something in or leave something out, and the act of making those decisions can change the boundaries of relevance.  Leave aside for now the generation of new search topics (and hence new queries) from the experience of reading: even within a single search ``instance'' with a relatively bound need the scope of relevance evolves as the user reads.
+
+Because of that evolution in relevance, the user's assumptions of how deeply they will explore the present ranked list evolve as well.  Trivially we would expect even the most tenacious user to stop reading when (or if) the documents in the ranked list seem to provide no more relevant information.  But when does that happen?  What does "no more relevant information" mean and how does the user understand it, both in the context of the current ranked list and for further searches?
+
+Nobody just does one search.  Users are much more likely to issue a second search query than to proceed to the second page of results from a web search~\autocite{ref-missing}.  This seems to be a combination of the speed of search along with expectations of the prevalence of relevant information at the top of a new ranked list rather than past rank 10 in the current one.  So to look at a single ranked list from a single query is very limiting.
+
+All of these observations stem trivially from taking a moment's time to reflect on my own search activities.  Nevertheless, the adhoc search task is simplified from reality in nearly every respect:
+\begin{enumerate}
+    \item We assume no context beyond the topic statement.
+    \item Relevance is uniformly assessed across all documents.
+    \item Relevance, and indeed the user's entire information need, is static through the entire ranked list.
+    \item The user is going to read that entire list, or at any rate significantly more than reasonable experience should lead us to think.
+\end{enumerate}
+This list of simplifications isn't exhaustive.  We haven't even touched on the issue that in most cases the document collection is a dynamic, changing, growing thing.  Even if a document has relevant information in it, that information isn't equally accessible in every document: some documents are hard to read, some are very long, some are very complex.  The user has only a limited amount of time to explore this search and probably others.  Some documents might be restricted from access by paywalls or security concerns.  And so forth, and so forth.
+
+The point is that the adhoc task is an {\em abstraction} of the real user task.  Although I emphasized quite a bit above that we are concerned with the tasks of real people as they search for information, in order to conduct experiments around those tasks we need to construct a task abstraction, to simplify aspects of reality that are too complicated to manage in the experiment, or which might otherwise distract the experiment in nonessential details.  It's not that all those details aren't interesting or don't deserve to be the focus of their own experiments.  It's that we have to draw a simplifying boundary around the task, within which we can define the interaction that takes place, in such a way that we can measure it simply and repeatably.
+
+The TREC adhoc task is so designed chiefly because of its ancestry in the Cranfield experiments. However, if you explore the history of TREC tracks and their development, you can see that many tracks were designed precisely to stretch this boundary.  The routing, novelty, and contextual suggestion tracks explore context.  The sessions, dynamic search, and relevance feedback tracks explore multi-step interactions.  Many incarnations of the web track explored both the dimensions of relevance in web search but also the interdependence of relevance among documents within the task.  The query track looked at the bridge from the information need to the query, and how that affects search.  Many tracks have investigated scales and categories of relevance and topic/subtopic relationships.  In some ways, the science of developing test collections is the science of how we can remove the simplifications of Cranfield and adhoc to move evaluation closer to the user.
+
+\section{Tasks from information science}
+
+PLACEHOLDER I think in this section I wanted to talk about exploratory search, and task frameworks from the interactive search community, and how those connect to existing and possibly new test collections.
+
+\section{Task and metric}
+
+The definition of the task is what drives the selection of the primary metric for a test collection.  While researchers can and should use multiple metrics to understand the success and failure of their search systems, the task definition provides the context and justification for the main metric of interest.
+
+The development of the adhoc task mirrors the development of understanding of precision, recall, and the relationship between them.  In particular, the recall-precision curve and the TREC definition of average precision are driven by the adhoc task concept.  Because the user will progress through the ranked list, recall must increase, although along the way the user will no doubt throw out many irrelevant documents, so precision will decrease as recall improves.  What is the rate of that trade-off?  The recall-precision curve illustrates it.  By showing precision at standardized percentages of recall, topics with different numbers of relevant documents can be compared.  Average precision is the area under the curve, hence a single-number summary of the recall-precision curve.
+
+Many other metrics have been proposed for informational search tasks, including discounted cumulative gain, rank-biased precision, and expected reciprocal rank.  Each bakes in a different set of assumptions about how the user is proceeding through the ranked list, and how relevance is traded off against effort.  In appropriate parameter settings, all of these measures correlate strongly, so another way to think of their differences is in terms of the parameter settings that make them different from one another.  For example, NDCG with uniform gains and a geometric discount is equivalent to average precision, as is rank-biased precision with a $\beta$ parameter of 0.99.  The definition of the task may imply different notions of gain, effort, or time, and hence changes in the metric or in its parameters.
+
+Another family of tasks are those where there is only one correct answer, or relevant document, or where the user only requires a single relevant document, or where for some other reason the user will stop reading the ranked list after the first relevant document is found.  A common metric for those tasks is reciprocal rank, although rank-biased precision with a very low $\beta$ would be equivalent.
+
+Measuring these tasks with the wrong metric means that we will draw incorrect conclusions about whether a system is effective for that notional user.  Reciprocal rank is the wrong metric for an informational search, unless it is known that there is only a single relevant document in the collection.  As we abstract the task, we do so with an eye towards selecting a metric that supports it.
+
+\section{Example: email search}
+
+Now I want to take a couple example tasks and abstract them in anticipation of defining and building a test collection for those tasks.  First, let's look at email search.  Although email seems to be declining as a mode of personal communication, in professional settings it remains essential by providing a so-called ``paper trail''; in my role in government we frequently receive requests under the Freedom of Information Act (FOIA) that include email queries.
+
+Searches in one's own email are predominantly known-item searches: the user is looking for a particular message or thread that they remember or that they have been reminded of.  The search might solely query on metadata (``Find that message from Alice that she sent sometime last week.''), or message content (``Where is that message from my boss about performance reviews?''), or attachments (``Do I have a PDF of Bill's slide deck from last year's conference?'').  Sometimes email searches are done to answer a specific question, for example, ``Who made that decision?''
+
+Email search is a terrific example of a search you don't want to have to do.  Someone probably interrupted you to ask whether you have that email thread from last Tuesday, or you're trying to prepare for a meeting or write a talk, and rather than doing those things you're rooting around in your email with a bad search tool.  Email should work like associative memory, but unfortunately the time to access it is $O(\mathrm{too long})$.
+
+Keep in mind that there is an information need, and then there is the query that gets expressed in the search box.  Few interfaces are supportive in helping the user distinguish metadata query terms from content, or allowing the user to be vague (``last week'').  We will return to this later in the chapter on topic development.
+
+Such is the story with known-item search.  There is another set of tasks that produce recall-oriented searches, for example trying to recover the decision points of a discussion that might be spread across multiple threads over time.  FOIA and legal searches are often seeking specific items but due to the adversarial nature of the search are formulated as broad recall-oriented searches.
+
+Mechanically, the structure from adhoc seems like it would work well here for known-item searches: a single query and a single ranked list, with a very shallow metric such as reciprocal rank.  This is straightforward but lacks sufficient punishment for retrieval failures: the information need is urgent and time-sensitive, so a frustrated user will often issue multiple queries in an attempt to find the message they are looking for.
+
+If we wanted to press further, we might consider how we could model a series of query reformulations.  Here's an approach from the TREC Query track~\autocite{buckley_query_track_2009}: let's collect a number of queries for each information need.  In the Query track this was done by having participants in the track concoct queries and submit them to NIST.  Then, all participants were asked to run everyone's queries on their own systems, submitting the results of each search. Another approach is to work with a topic development team and ask them to brainstorm queries for each need.  In the example I'm forming here, I want the queries to be independent -- imagine that the user is getting no results or unexpected results from each query, so they reformulate without having much sense of direction.
+
+Now, in order to simulate a reformulation process, we'll stage the retrieval like so.  The first query is randomly chosen from the set of queries we have for that need.  If the system retrieves the target message or thread below rank 5, the user issues another random query from the set.  Let's consider getting past four query reformulations without finding the target as a total failure.  We can run this as a sort of ``bootstrapping'' experiment, with hundreds of trials, randomly selecting a start query each time.  As a metric, we could concatenate all the ranked lists (which remember only go to depth 4) and compute reciprocal rank, or we could imagine combining the rank of the correct answer with the query iteration differently.  We can use different metric designs to explore the impact of differing costs for reformulation.
+
+The true complicating factor for building a test collection for email search is, where does the email come from?  Most people consider their email to be private, whether or not it actually is.  Here is a situation where organizations looking at their own data are at a distinct advantage, as they can use their own email archives as an internal experimental platform, whereas a community of researchers has to come up with a different solution entirely.  We will explore the problem of identifying the document collection in the next chapter.
+
+\section{Example: news filtering}
+
+Filtering is a task that attracted a lot of interest in the first decade of TREC.  Filtering is the inverse of adhoc search: the documents come by in a stream, and filtering needs are static information needs that fish out relevant information from the stream.  In a real scenario filtering needs change over time, just like adhoc information needs, but to keep things simple we will assume they are static for purposes of building a test collection.
+
+There are a number of variables to fix for the filtering problem.  The first is the rate at which the system returns documents to the user.  A simple setup requires the system to decide at each individual document whether to show it to the user; this was the setup in the TREC adaptive filtering task.  A second approach is to allow the system to batch up some number of documents or to make decisions on a regular time interval; in TREC this was termed {\it batch filtering}, although this is really the same as the first approach if we only have single-document batches.  The key difference is that the system can make a retrieval trade-off decision within each batch, only returning the most likely documents in each batch; in document-at-a-time filtering, the system has to decide when the document arrives.
+
+The second major set of decisions is whether the user responds to the documents retrieved by the system with feedback.  The second task to run in TREC after adhoc was called ``routing'': for each query, there was a set of training documents, and the system was required to rank the rest of the collection as a single batch.  So in routing there is one block of feedback.  There were a few reasons for this setup, but the major one was to explore how to set up the experiment right.  Should the system rank the entire collection aside from the training documents?  Or just the documents that arrive later?  In either event, since there may be different numbers of training documents for each topic, the system is ranking a different set of documents each time, so does it make sense to average the score across queries?
+
+The TREC filtering track was an effort to try to explore more realistic interaction models.  In adaptive filtering, which was a document-at-a-time setup, if the system retrieved a document for the user, and a relevance judgment for that document existed, then the system was given that feedback immediately.  However, there was no feedback for documents not retrieved (even if they were relevant).  The system could choose to adapt based on feedback at each step.  In batch filtering, the system had to make a decision at each chunk of $n$ documents, and again feedback was received based on the decisions for that chunk.
+
+Metrics for filtering are hard to design because since both the prevalence of relevant information as well as the structure of the interaction are different for each topic, it's hard to have a sensible notion of average performance.  TREC filtering explored metrics based on utility: if the system retrieved a relevant document, it received a credit, but if it retrieved an irrelevant one, it was debited.  In a setup like this, especially if the training data is sparse, it's hard to beat a baseline system that retrieves nothing: the user didn't get what they wanted, but the system didn't bother them, either.
+
+\chapter{Selecting a document set}
+
+Oftentimes the document set is what inspires IR researchers; new sources of information imply new kinds of search tasks as well as different spins on well-understood tasks.  There are a number of important considerations to weigh when identifying the document set for a test collection.
+
+\section{Naturalistic, Opportunistic, Targeted}
+
+I divide document sets into three types: naturalistic, opportunistic, or targeted.  A naturalistic document set reflects as much as possible how the documents are encountered ``in the wild.''  An opportunistic document set reflects what is available to the researcher.  A targeted document set is assembled within the context of a specific task or user activity.
+
+A general web crawl, starting from generic sources like the ODP and Wikipedia, and extending for hundreds of millions of pages, is naturalistic.  The structure of the data is messy and unconstrained.  The search user population seems independent of the population that created the documents, and more importantly the search task is not directly dictated by the data.  Spam content may be generically controlled for by limiting crawl depth or frontier allocation, but we would expect some proportion of the document set to be spam (which here I define as ``useless for nearly any constructive search purpose'').  Although because of the logistics of web crawling, a crawl is necessarily an opportunity sample, the net is cast so wide that we don't think of the sampling process as limiting the scope or utility of the collection.
+
+The web space from a single university is an opportunistic document collection.  Because it is bounded within a known set of servers or IP ranges, it might be possible to collect it completely.  As a single data source, it offers different restrictions and opportunities in terms of distribution permissions than a general web crawl.  The document set implies certain kinds of search tasks and not others --- searching the university website may be less useful for vacation planning or buying a toaster oven than searching the general web.  Because of the organizational focus we might expect spam to be less prevalent in the document set.
+
+The top 20 hits retrieved for one million queries on a major search engine reflects a targeted document set.  All the documents occur in the set because someone searched for them.  By definition they are all findable.  At least one search system determined them to be highly likely to be relevant to at least one search need.
+
+There isn't necessarily one class that's better than another, but the construction of the document set affects the kinds of search tasks that can be modeled on it.  The selection of documents can have a large impact on the effectiveness of a search system.  For example, a number of the older test collections from the 1980s have targeted document sets, and a common feature of them is that it's easy to get good performance on those test collections.  Nearly any document set is selected opportunistically to some degree, but if we hope that performance on the test collection will be indicative of performance on naturalistic or targeted collections, then we need to take care.  Any newswire collection is an opportunistic document set, because it's what the source was able and willing to make available.  However, if the time scale or range of types of articles included is sufficiently broad then we can treat the collection as naturalistic.
+
+By articulating the task, some of the assumptions that come from selecting the documents for the test collection can be made explicit.  For example, we might imagine a task where the user is handed an inbox of documents to review, and the system's goal is to re-rank those documents to make the most effective use of the user's time.  With this explicit context, a targeted document set makes sense, although we can easily imagine that having a naturalistic collection with a targeted subset would allow systems to make better decisions.
+
+\section{Advice on working with data owners}
+
+Please do not take the information in this section as legal advice.  My purpose here is to share my experience and how we've worked through copyright issues in distributing test collections.  If you are planning to distribute your own test collections with documents that you didn't write, you might want to consult with your organization to understand your legal risks.
+
+When the TREC collections were first created in 1991, we managed to arrange a data usage agreement structure that was agreeable to the owners of the content and also remarkably simple.  This was possible for a number of reasons.  One was that in the early 1990s, very few publishing or news companies foresaw the impact the internet would have on their industries.  Another was perhaps that the imprimatur of NIST as an independent science organization may have made us a trustworthy partner.  I don't know for certain, but I am sure that those usage agreements were a critical factor in TREC's impact, and in turn we were able to convince some other content owners of the benefits of reasonably unfettered research use rights.
+
+All this is to say that creating test collections is one thing, and distributing them is another.  If you are leveraging content owned by someone else, then they might very reasonably want a say in what you do with that content.  In the case of general web crawling, you might have an argument to make that research collections are fair use, but that is by no means settled law in the United States.  In the case of news articles, or social media content that is explicitly governed by its own usage agreement from a single entity, you have a significant risk that you will put a lot of effort into building something that you can't share.
+
+My advice is to work with content owners, and never against them.  Contact them early in your process.  If they buy into your research goals, you might find that they are willing to support your effort, even as simply as offering a database dump to keep you from crawling their site.  You can work with your organization's public affairs unit, or funding agency representatives, or industry contacts to facilitate the conversation.
+
+\chapter{Defining "relevance"}
+
+People use information retrieval systems to find relevant information, but the definition of what it means for something to be relevant is quite complex.  This chapter discusses a pragmatic approach to defining relevance which rests on the centrality of the task construct described above in ``Defining the task''.  Then, the next chapter will dive into how we actually assess relevance in practice.
+
+\section{A pragmatic approach}
+
+Relevance is a central concept in information retrieval, but for a central concept, it's remarkably hard to define. 
+\begin{marginfigure}
+    \includegraphics{brain-1.png}
+    \caption{A task-focused definition for relevance.}
+\end{marginfigure}
+Some of the most spirited attacks on the test collection methodology stem from the problem of defining relevance.  Relevance is a many-splendored thing, and a many-splintered thing.  It varies from user to user, over time, even within the same search session.  Relevance can have many facets depending on the information need.  Relevance can hinge on novelty, or prior knowledge, or corroborating evidence outside the collection.  Indeed, there are some very rich models of relevance that have emerged from the information science and interactive information retrieval communities, and I will cover some of them in the next section.
+
+When we build a test collection, we will spend a considerable amount of time and effort eliciting judgments of relevance from people, and thus while relevance is indeed rich and complex, pragmatism dictates that the criteria for making relevance judgments be simple and intuitive so that the judgments are reliable and consistent.  Consistency is already a step removed from reality, but a step that must be taken to support measuring systems.
+
+In fact, I have already stressed the importance of taking steps back from reality when defining the task.  The test collection itself is an idealized scenario, with a number of assumptions made explicit so that we can conduct quantitative experiments on systems with data.  So while we are abstracting the task, we will also be abstracting relevance along with it.
+
+The key point is that relevance is what the user wants (or needs) to find in order to be successful.  Hence, the task construct is essential in defining relevance for the test collection: the task defines what the user is trying to accomplish, and relevance describes the artifacts uncovered during the search that allow the user to complete the task.  The TREC adhoc task is a general informational search where the user wants to find any and all information about their topic.  As I will discuss in the next chapter, TREC adhoc uses a very minimalistic operationalization of relevance, which is that any information in the document about the topic, no matter how small or whether it is already known, is relevant.  This is what is implied by "any and all" in the task construct.  This is the general guideline from the task; individual topics in TREC usually define boundaries on ``aboutness'' for that topic, and subject to those locally-scoped constraints, the general guideline holds for all topics in the collection.
+
+There is nothing (or very little) about this instantiation of relevance that is essential to being able to build a test collection.  We can in fact define relevance to be nearly anything we want it to be, as long as the presence of relevance in documents is what leads the user to task success, and people can reliably determine when a document is relevant as relevance has been defined.  Some definitions can lead to intractable problems gathering relevance judgments, and again those situations will be covered in the next chapter.
+
+So we will start from the task, consider what it is about the documents that makes the user successful when he or she finds them, and define relevance to encompass that.
+
+\section{Information science perspectives on relevance}
+
+There is a bit of a survey in here.  We should keep it to Tefko's long IPM paper, Pia's model(s), Diane(s) models, and stop there if we can.  Keep it to models that have task at the center.
+
+Donna has a bunch of citations in the TREC book, p34, about defining relevance in test collections: Katter 1968, Cooper 1971, Bookstein 1979, Burgin 1992, Harter 1996.
+
+\section{Human factors perspectives on relevance}
+
+Another survey will go here.  I don't know this literature yet.  What I DON'T want is to get into elicitation issues, but rather talk about how HCI folks think people recognize relevance.
+
+\section{Explicit relevance vs implicit relevance}
+
+In discussing relevance, I assume a definition of relevance that can be articulated and made explicit.  Many especially in industry are interested in implicit relevance, that is, being able to observe relevance without the user's explicit relevance judgment.  This is actually an issue with eliciting relevance judgments rather than defining relevance, but since in many cases the notion of "task" is also vague and implicit, it bears mentioning here as well as in the next chapter.
+
+Let's take the following approach.  Even if the user doesn't have an explicitly stated task, there is a task context, within which searches take place, and that context {\em could} be written down if we wanted to do so.  Likewise, a user might not explicitly define what it means for a document to be relevant, but nevertheless, if a document is relevant we could articulate the reason if we wanted to do so.  In designing a test collection, we will have to make some decisions about task and relevance, in order to make meaningful measurements.  Formally articulating the task and defining relevance may feel artificial, because no user actually does that, but nevertheless, there is a task and relevance can be defined.  We can't measure search without a task context, because there is no framework to understand what it means for a search to be successful or not.  In the same way, we also have to define relevance, because otherwise there is no framework for us to ask users whether a document is relevant or not.
+
+A consequence of this approach is that we can't measure search in the absence of a concept of the user task.  Thinking of our target users as "generic users" or "web searchers" is not precise enough to have criteria for the context of a query, the notion of relevance, or any metrics to be meaningful.  Since clearly these things must exist for every user, the consequence is that the measures are muddled by conflating all the users and their myriad tasks and goals together.  As a result, tuning to those metrics emphasizes the frequent queries to the expense of less frequent ones.
+
+This conflation doesn't happen in industry anymore, as evidenced by rich investment in query understanding that has gone into engineering modern web search engines.\footnote{To read more on query understanding from an industry perspective I highly recommend Daniel Tunkelang's blog series on the subject at \url{https://queryunderstanding.com/}} (Clearly if the query processor is routing to different verticals and ranking algorithms, each of those rankings can be measured separately using different metrics which in turn imply different tasks.)  But it is a concern for research and for building test collections, because we need to be specific about what kind of search the test collection supports for the results of experiments to have a hope of generalizing.
+
+\chapter{Eliciting relevance}
+
+Now that we understand that relevance is defined by the task as well as the user's specific information need, I can present methods for eliciting relevance judgments for documents while building a test collection.
+
+Clearly, if relevance is inherent to the task and the user, then the optimal place to elicit relevance is from that user while they are in the course of working on the task.  However, just barging in on working people to interrogate them and ask them to label documents is not a winning strategy.  The reason why seems obvious: people are involved in solving the task, and describing and documenting that process to the degree required for a test collection is a distraction from the task itself.  It's quite likely that in asking users to provide relevance judgments while performing the task, we would affect the user's definition of relevance as well as their level of success in accomplishing the task.  This tradeoff is a key component in the design of user studies that examine task-situated relevance,
+
+We can take three approaches in practice: we can just observe the user unobtrusively and hope to divine relevance from their behavior, we can design a system that supports the user in solving their problem by providing rich relevance feedback, or we can train people to pretend to be ``real users'' for the purpose of making relevance judgments.  I discussed problems with the first approach in the previous chapter.  They are not insurmountable problems, but they are challenging and require both large user and observational studies and hence are beyond what I can hope to cover in this book.
+
+The second approach seems straightforward, especially when we consider that relevance feedback is one of the most successful algorithms in the history of information retrieval.  Except that for some reason no existing system in large-scale use features explicit relevance feedback.  Why is that?  Well, there is a chicken-and-egg problem, in that when widespread systems don't offer the tool, people don't know how to use it, so they are reluctant to do so.  Combined with that are good reasons from human-centered design: no one has come up with a fluid, functional, and intuitive interface for working with feedback data.  (One-off searches are not the challenge here, but rather supporting the user in collecting and managing information over a long search process.)  Check in again in a few years.
+
+The last approach is to have special users play the role of the real user and make relevance judgments as if they were the real user.  These special users, called ``assessors'' in the TREC milieu and sometimes ``annotators'' elsewhere, have to be trained to understand their somewhat theatrical role and to maintain a balance between pursuing the task and tracking relevance.  Appropriate tools can support this too.
+
+\section{Operationalizing relevance}
+
+In the last chapter, I recommended defining the notion of relevance within the context of the task, and also gave the pragmatic guideline that ``the things the user wants to find'' are the things that are ``relevant''.  Within that scope, relevance can be defined to be almost anything, but in order to make that work in operation there are some considerations to take into account.
+
+These considerations come out of the premise that our assessor will examine hundreds if not thousands of documents in order to label them for relevance with respect to the task and the topic.  (If ``thousands'' seems frightening remember that a document could be quite small, for example a tweet, or a paragraph, or a snippet.)  We don't want the assessor to need to spend too much time deliberating a decision.  We don't want them to have to consider other documents to any great degree when making an assessment of a given document.  We don't want them to have to review decisions they've already made, but if they must, we want that process to go quickly.  Ideally, the assessor should be able to achieve a ``steady state'' where they are working through documents at a reasonable, regular pace.
+
+I should point out that this implies that the assessors have a certain skill set, namely that they are capable (and indeed good at) reading a lot of documents, quickly, but with a critical eye and an analytical perspective.  At NIST we specifically look for assessors with a strong professional background in an analytical career, for example research librarians, journalists, and others with experience collecting and managing lots of information for other people.  When reading my recommendations, I think it's critical to take into account the work abilities and habits of the people who will be assessing the documents.  For example, undergraduate students may not be voracious readers and might prefer to focus on a task for only a short period of time.
+
+The premises above run counter to common practices when labels are crowdsourced. In a crowdsourcing situation, workers should require minimal training and experience, a worker will typically only label a few items, and many workers will label items in the same class.  It's tricky to expand this paradigm to information retrieval, where we know that people disagree reasonably about what it means for a document to be relevant, and we're trying to develop systems that embrace that ambiguity.  I'll discuss crowdsourcing more in a later chapter.
+
+Nevertheless, there are two guiding principles I recommend in creating an operational definition of relevance.  Relevance should be {\em minimal} and it should be {\em independent}.
+
+``Minimal'' means that the gray boundary between {\em relevant} and {\em not-relevant} is made as clear as possible, by having the essential requirements for relevance be as simple as possible.  TREC's definition of relevance in the adhoc task states that a document is relevant if any part of the document, even a single sentence, contains information that the user would include in a report on the topic.\autocite[chapter 2]{voorhees_trec:_2005}  In this formulation, the assessor does not have to decide if the document is ``relevant enough'' to mark as relevant, it either meets the bar or it doesn't.
+
+One consequence of the minimality criterion is that some documents seem to be ``barely relevant'' or ``marginally relevant'' and not {\em really} relevant.  It's the minimality criterion that causes this. In fact, assessors regret grouping marginally relevant documents together with highly relevant ones.  In the TREC-9 web track, Voorhees explored whether evaluation results would change if metrics were computed using only ``highly relevant'' documents rather than the full set of relevance judgments.  The NIST assessors tend to appreciate being able to differentiate highly-relevant documents from just-relevant ones, although their criteria vary widely from topic to topic and assessor to assessor.\autocite{voorhees_evaluation_2001}
+
+``Independent'' means that the assessor should be able to judge the relevance of one document without reference to any other document.  In TREC adhoc relevance, a document is relevant even if the same information has been found in another document, even the identical text.  This seems contrary to what we would assume about most users, which is that once they've found the information once, they don't need it again.  In fact, for a number of recall-focused tasks, the users need to collect all citations of a particular piece of information, and when the information is attested in more than one document or from more than one source, the multiple attestations themselves are informative.  Consider asking someone how they know that a piece of information is true: they may know it from a single source they trust, or multiple sources that eventually track back to that single source, or from multiple independent sources.
+
+There are evaluation reasons for the independence criterion as well.  Let's consider a piece of relevant information that is attested in a document, and that the collection contains multiple exact copies of that document.  It seems straightforward that the system should only get credit for retrieving one copy, but we don't know which copy the system will retrieve.  If they are exact copies in the sense that the system finds the exact same set of features for each copy, then given a single user and query, the system would likely retrieve all the copies together in a ``clump'' of the ranked list, in a random order (with respect to relevance) within the clump.  Two systems retrieving the clump at the same ranking should get the same credit.  We can only do that if all copies have the same relevance judgment.\footnote{Practically speaking, we should not rely on assessors to judge duplicates the same and to distinguish near-duplicates consistently.  Rather, the assessment system should support this by identifying near-duplicates and helping the assessor resolve conflicts.  I discuss this later on in this chapter.}
+
+Of course, duplication is an extreme case, and the more practical question revolves around what exactly we mean by "a piece of information", and how that information is attested through language in a document.  Different news articles might contain the same quote, or mention a count of casualties from a disaster, or refer to a meeting listing the people present.  A solution to this is to revisit the task as one where the user is looking for specific information, and we can imagine listing out the different pieces of information in a bullet list.  We probably can't do that for every piece of relevant information, so this list would likely focus on key facts, relationships, quotes, and such that the assessor needs to find.  Then, during relevance assessment, the assessor can tie a relevant document to the bullet list items attested from the document, and we can use a diversity ranking metric to give credit to a ranked list that favors covering more bullets more than finding copies of the same bullet.
+
+We can take this facet retrieval approach to solve the difficult problem of novelty.  Novelty is a compelling requirement: we would like a search that only returns new things, or (to express that in a way that doesn't require complex user modeling) the ranking should only have documents with new relevant information with respect to what has already been retrieved.  First, recognize that we have the same difficulty as above: we need to define the pieces of relevant information so we can articulate what we mean by ``novel''.  This is necessary because there is always something new in another document.\footnote{They don't call it ``news'' for nothing.}  It might be irrelevant, or it might be immaterial, or you might not care about it.  Different word choices in different sentences are innocuous expressions of style, but when you try to decide if the later sentences add anything new, all of a sudden those word choices imply subtle new pieces of information.  Again, they might be below the threshold of importance to the user, and so we need to take the approach of defining what is important to the user.  
+
+For example let's imagine a user who is reading coverage of an earthquake, and one thing they want to find are new reports of casualties.  Now, the problem of novelty is limited to determining if mentions of casualties are the same -- not trivial, but narrower than ``generic'' novelty.  In this way, we can define a topic with facets that encompass the aspects where the user cares about novelty: reports of building damage or collapse, noting that a particular NGO has deployed to the site, an interview with specific individuals.  During the relevance assessment phase, we can imagine the assessor binning each relevant document according to the one or more facets covered by the document.  This is most easily done in a second pass over just the relevant documents, asking the assessor to assign a ``reason'' that the document is relevant, and allowing them to create new reasons if the inventory needs them.\footnote{See below on multiple-stage relevance assessment.}  This process scales up to perhaps two dozen reasons or facets because of the cognitive load of asking the assessor to keep track of all the facets.
+
+\section{Agreement}
+
+Assessors disagree about relevance.  They disagree with one another, and they even disagree with themselves at different points in time.  Sometimes the disagreements concern documents that are marginally relevant, but sometimes for one assessor the decision is obvious while for another it's on the borderline. Voorhees reported overlap (that is, cardinality of intersection over union) in the range of 0.3 to 0.4 for TREC-4 and TREC-6 collections, among NIST assessors and between NIST and University of Waterloo assessors.\autocite{voorhees_variations_1998}
+
+Assessor disagreement is different than agreement in labeling or annotation in many machine learning tasks.  Often, the categories in a classification problem are not subject to wide interpretation, or at any rate are subject to less variance in interpretation than document relevance.  For example, ImageNet classes\footnote{\url{www.image-net.org}} are aligned with the WordNet lexicon, and as a result are narrow concepts with a fixed definition in a canonical location.  Relevance is frequently a more slippery criterion.
+
+This is not to say that relevance can't be strongly or narrowly defined.  For a known-item search task, there is only one right answer.\footnote{There may be duplicates of the item in the collection, or near-duplicates, or other documents with functionally identical content, which might be equally as relevant, depending on the person's specific need.  Consider for example a page that wraps Wikipedia content with their own ads.}  Examples of known-item tasks include searching for a specific email, re-finding a web page, or looking for someone's homepage: there is one or anyway very few correct answers, and they may be in some sense ``canonical'' and assessors may agree more strongly than they do on an informational relevance task.  But do note that this agreement shift is obtained by changing the task.  Assessor agreement is intimately tied to the definition of relevance and hence to the task that the test collection is being built to model.
+
+I have some random thoughts here on the relationship of IR and classification in machine learning. There are a number of points in the literature that assume that classifying documents into relevant or not-relevant is just like other classification problems.  Maybe it is.  But given assessor disagreement in relevance, which is part of reality in a way that it just isn't for cat pictures or the presence of a tumor in a radiology image.  Maybe the assessor disagreement boundary represents the limit of what information retrieval can achieve with models that only use features in the document, and don't take any steps to specifically optimize around disagreement, like personalization.
+
+There is probably room here for something of a survey of the SIGIR literature on this topic.  Also, a quick survey of agreement measures and their attendant risks, with a citation of that nice survey whose authors or title I'm blanking on now.
+
+There are a fair number of metrics for inter-annotator agreement, each with various advantages and disadvantages.  The percent overlap between annotators is an obvious and intuitive measure, but it is only usable for annotator pairs and nominal scales.  In information retrieval, there are many more nonrelevant documents than relevant ones, so percentages of overlap greater than 90\% can still indicate disagreements that have a high impact on system measurement.  A number of measures have been proposed to shore up these and other issues, with Krippendorff's $\alpha$ being the most suitable at this time.\autocite{hayes_answering_2007}  Cohen's $\kappa$ is often reported in the literature, but has several shortcomings discussed in the cited survey by Hayes and Krippendorff.
+
+\section{Assessor skills, knowledge, and experience}
+
+The fundamental skill set for a good assessor is to be able to read critically, analytically, and quickly, for long periods of time.  I know that I personally have none of these characteristics.  I am very distractable, and given a large stack of things to read, I will avoid it like the plague.  I make a terrible assessor, as I know from experience doing a small amount of assessing in the course of building tools for making test collections.
+
+Often at NIST our assessors are retired from their primary job, and I've found that the strongest assessors come from jobs with an analytical background, like journalism, history, languages and literature, that also require lots of reading.  In a university setting, there are lots of people across the organization with skills like these who are happy to find part-time work.  So look beyond the students in your lab when thinking about recruiting assessors.
+
+At NIST our assessors are paid contractors, and I think that by paying professionals we can achieve, or at least expect, high quality work. I am by no means an expert in the gig economy or crowdsourcing, but I suspect that in terms of total cost, I spend more up front and crowdsourcers spend more in recruiting and HIT design, and then afterwards in data cleaning and de-spamming.  This is certainly an active area of research.  Another perspective is to consider the value of the data being created.  How long will that data be used in the research community?  Good data has a high impact and that means that the investment in that data pays off, in dissertations, students, and community respect and recognition.
+
+One advantage of having assessors that work for us on a number of tasks over time is that we can estimate how long a task will take to do, or equivalently, given a group of assessors and a timetable, how much can we ask them to do in that time?  Armed with a broad notion of documents assessed per hour, I can measure how that varies due to the assessor, the topic, the task, and the document type.  Then we can ``normalize'' that measurement against what it tends to take to build an adhoc collection on 50 topics with news or web, which is a traditional task we have lots of experience with.  When the assessors are working slower than we expect, we can look for reasons for that; the most common is document rendering issues.\footnote{As an example, consider displaying web pages from the ClueWeb12 collection in 2019.  We have the page itself locally, but all the linked resources like images and scripts have long since moved on.  All those fetches have to time out before page loading can complete.}
+
+\section{Assessment guidelines}
+
+As I've mentioned, relevance is a squishy, idiosyncratic notion even when defined in the context of a task and a specific topic.  It's important to give an assessor enough structure to support consistent decision-making, while at the same time recognizing the assessor as the user who is making those decisions as they pursue their own information task.
+
+One level of structure is the task description.  For the traditional adhoc task, the assessor is told that they are seeking any and all information on the topic that they would include in a report.  The concept of the report is familiar to our assessor staff, and broadly this resembles a task many of them engaged in professionally in various guises.  The assessor is called out as the author of the report and the one responsible for its content, which empowers them to make decisions about what is worth citing and what is not. The assessor has an audience, the report recipient, who is not necessarily specified in the task but is assumed to be a supervisor or subject-matter lead.  This role-play allows the assessor to own the process and product of their work, which in turn should support their consistency and correctness.
+
+The second level is the topic itself.  TREC topic statement format has evolved over time, but commonly topics include three sections: a short {\em title}, a sentence-length {\em description}, and a paragraph-length {\em narrative}.  The narrative spells out the bounds of the topic, the frontier of relevance where the assessor decides what to include and what to leave out.  As I will discuss in the chapter on topic development, at NIST we try to ensure that the author of the topic also makes the relevance assessments for that topic.  However, this isn't always possible, and in cases where we reassign a topic, the narrative documents the topic from the original assessor's point of view.  The assessor makes their own decisions, within the bounds of the narrative.\footnote{There are times when the narrative is not released until after relevance judgments have been made, and in these cases we can actually update narratives if we discover unexpected ``gray areas'' that should be documented.}
+
+\section{Training procedures}
+
+Usually I spend an hour or two training assessors to work on a task.  That time includes some administrative necessities, but the majority of the time is spent discussing how to determine relevance.  Obviously this training is different for every task, but there are consistent pieces I always include.
+
+Some tasks are divided into two phases, topic development and relevance assessing.  I've mentioned before that in the TREC process we scout and create search topics, which are then released to participants without any survey of relevant documents in the collection.  Later, participant submissions to TREC are pooled for assessment.  These topics are discussed in greater depth in chapters on topic development and selecting documents to label.  At any rate, the concept of relevance is important both when we develop topics as well as when we assess relevance, so some of the material is repeated.
+
+The first thing I discuss, after any administrative preliminaries, is to set up the role-playing scenario.  I describe the user of the system, their goal, and sometimes their workflow in an imagined real-world system.  If it's part of the task, I'll describe how this person's work fits into an overall organizational goal, but in any event I describe a final product that they should imagine creating at the completion of their task.  In order to let the task drive the intuition of relevance, the assessors need to be situated in the task and to have that role firmly in mind.  If they have a question about how to judge a document that isn't clear from the instructions, the task role-play is what we fall back to in order to get an answer.
+
+At this point, I set out a simple statement of the standard for relevance, for example in a classic adhoc task, ``A document is relevant if any part of the document, even a single sentence, contains information that you would include in your report on the topic.''  Note the reference to the task and the end product.  I stress the independence of relevance: even if they've seen the information before, even with the same words, the document is still relevant.  (If relevance is not independent, then the assessment procedure and interface needs to support making joint decisions.  More on this later.)
+
+I emphasize the agency of the assessor.  It is critical for them to understand that they are the ``user'', and that the judgment of relevance is theirs alone to make.  People can reasonably differ about whether a document is relevant, but the arbiter that matters is the assessor who is in the role of the information-seeking user.  It is their task, they are working towards their goal, and the end-product (if any) is theirs.  If an assessor comes to me to ask how to judge a document, I always turn the question around: ``What do you think?''
+
+However, assessors make mistakes and practice is essential, and so we work through examples together.  Sometimes I will select a set of examples but more often we will start with the pool for a random topic.  The document is displayed on a projector, or shared in a screen-share, or printed out, whichever way promotes readability.  We read the document together and then discuss whether it's relevant to the topic.  If we're lucky, there is disagreement among the group, so we can explore whether we're in that zone of reasonable difference, or if someone is making an error in judgment.  The first few documents may take five or ten or twenty minutes to discuss, but we work through examples together until we seem to hit a rhythm.
+
+\section{Graded relevance}
+
+I've talked about understanding the relevant-nonrelevant distinction, but since TREC 2000 most TREC collections have three or more relevance levels.  Voorhees' paper\autocite{voorhees_evaluation_2001} describes adding a ``highly relevant'' category, defined as ``If the document directly addresses the core issue of the topic, mark it highly relevant,'' and in subsequent collections with a highly-relevant category, the definition is usually equivalent.  We found that given a minimal definition of relevance, the assessors liked having a way to distinguish highly-relevant documents from ``just relevant.''
+
+Note that this notion if highly-relevant has no definition beyond that in the topic itself.  The criteria that make a document ``address the core'' are not specified, and indeed the ``core'' of the topic is undefined.  Hence, we would expect highly-relevant designations to follow the searcher's understanding of the topic just as regular relevance does, and to vary between assessors.  As Voorhees notes, we expect (and find) that there are many fewer highly relevant documents than relevant ones, and this causes the evaluation to become unstable.  This stability can be addressed by adding more topics, as I will discuss in the chapter on measuring test collections.
+
+Other categories apart from relevance were explored in the TREC web track, and on several occasions ``spam'' was added as an extra non-relevant category.  Web spam is surprisingly difficult to label when assessing documents outside of a browsing context.  When the pool is essentially randomized with respect to relevance, the demarcation between a spam webpage, a non-relevant webpage, and a really awful but perhaps not spam webpage is hard to identify.
+
+The NTCIR evaluations have a long history of using graded relevance from the start.  In the first chapter of the NTCIR book\autocite[chapter 1]{sakai_evaluating_2020}, Sakai describes both the graded relevance scales applied in different tracks, as well as the development of measures that taken them into account, presenting the most complete survey of graded relevance assessments and metrics to date.
+
+In my experience, it seems to me that multi-valued relevance scales are frequently either categorical in nature, or represent a series of levels of relevance, or a mixture of both.  For example, some tasks in the TREC Web Track used the three-point relevance scale, with an additional level at the top for a ``key page'', and an additional level at the bottom for spam.  It seems to me that mixing categories and levels makes the metrics somewhat difficult to interpret.  For example, the nDCG metric\autocite{jarvelin_cumulated_2002} treats gains from a document as ratio-valued, so a document with a gain of 4 is twice as good as a document with a gain of 2, but the mapping of relevance values to gain scores doesn't necessarily tie that back to the task or any model of the user.  If in addition, categories are introduced which may be orthogonal to relevance (for example, spam), then this further confuses things.  Simpler metrics such as average precision that subset the relevance judgments based on level or category may lose information, but they simplify the analysis of the results to interpretable ranges of the relevance scale.  For mixed scales, one could scatterplot AP of a category against nDCG based on gains.  Another idea is to explore the mapping of gains to relevance, and ask what level of distinction is required between gains to observe meaningful differences in retrieval effectiveness.
+
+By introducing multiple levels of relevance, we are saying that the distinctions between levels is important to the user as they perform their task, and that systems that learn to distinguish them will be helpful to the user.  If the levels are categories or levels on a single scale, then it seems that straightforward learning models could capture those relationships given enough of the right data, but a mixture of categories and scales would require a structured model informed by the task.
+
+task-oriented gradations
+
+\section{Interface considerations}
+\section{Multiple stages of assessment}
+\section{Implicit relevance assessment}
+\section{Minimizing error}
+\section{Maximizing consistency}
+\section{Detecting errors and inconsistencies}
+\section{Agreement revisited}
+\begin{itemize}
+\item multiple judges
+\item one judge per topic
+\item diversity as an approach to agreement
+\item measurement as an approach to agreement
+\end{itemize}
+
+\chapter{Topic development} \label{topic-development}
+
+\section{Collection exploration}
+\section{Working from query logs}
+\section{Random documents and backfits}
+
+This section is a stern warning on creating topics by selecting documents at random from the collection, or backfitting topics to documents found through search.  This last was actually how CRAN was built.  Don't do that.
+
+\chapter{Selecting documents to label}
+
+\section{Historical perspectives}
+\section{Pooling}
+\section{Advanced pooling strategies}
+\section{Sampling}
+\section{Incompleteness}
+\section{Limits of pooling}
+\section{Bias considerations}
+\section{Interplay of effectiveness and pooling}
+\section{Leveraging manual effort}
+\section{Iterative strategies}
+
+\chapter{Measuring test collections} \label{measuring-test-colls}
+
+\section{Holding out runs}
+\section{Discriminative power and minimal detectable differences}
+\section{RBP residuals}
+\section{Variance across topics}
+\section{titlestat}
+\section{Near-duplicates}
+\section{Nuggets}
+\section{Parallel online/offline testing}
+
+\chapter{Crowdsourcing}
+
+\section{Disagreement, poor work, and spam}
+\section{Small work packages vs one topic per judge}
+\section{Aggregating work across judges}
+\section{Recommendations}
+
+\chapter{Things that are harder to label than relevance}
+
+\section{Novelty}
+\section{Trustworthiness}
+\section{Reliability}
+\section{Authoritativeness}
+\section{Opinion bias}
+\section{World knowledge}
+\section{Labels requiring special skill sets}
+
+\chapter{Open questions}
+
+\section{Bias or poor perforamance}
+\section{Predicting online satisfaction from test collections}
+\section{Test collection maintenance}
+\section{Size, statistical power, and discriminative power}
+\section{Topic sampling from the universe of needs}
+\section{Document sampling from the universe of information}
+\section{Estimating recall}
+\section{Detecting and differentiating errors, inconsistencies, and disagreement}
+\section{Tools to support good labeling}
+
+\chapter{Case studies}
+
+\section{TREC 8 Adhoc}
+\section{TREC 2002 Filtering}
+\section{Homepage finding, named page finding, and distillation in the Web Track}
+\section{Novelty track}
+\section{Dynamic Domain}
+\section{Microblog}
+\section{Million Query Track}
+
+%%
+% The back matter contains appendices, bibliographies, indices, glossaries, etc.
+
+
+\backmatter
+
+\printbibliography
+
+\printindex
+
+\end{document}
