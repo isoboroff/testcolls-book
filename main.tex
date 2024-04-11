@@ -620,7 +620,7 @@ One feature we include in a lot of our assessing tools is a highlighting facilit
 
 \section{Multiple stages of assessment}
 
-Novelty is one thing that is very difficult to measure using manual assessments.  It could involve comparing every document against every other document, turning an $O(n)$ assessment process into an $O(n^2)$ process. That's not even really possible to do, because asking assessors to label if something is novel relies on their working memory or note-taking process to keep track of things.\footnote{Remember, there's almost always something new in a news article, that's why they call it ``news'', after all.}
+Novelty is one thing that is very difficult to measure using manual assessments.  It could involve comparing every document against every other document, turning an $O(n)$ assessment process into an $O(n^2)$ process. That's not even really possible to do, because asking assessors to label if something is novel relies on their working memory or note-taking process to keep track of things.\footnote{Remember, there's almost always something new in a news article. That's why they call it ``news'', after all.}
 
 In natural language processing there is the similar concept of {\em coreference}, whether two pieces of text refer to the same entity, event, place, etc.  In order to annotate coreference, you either have to match each annotation against all other annotations, or you need to link against an external reference knowledge base; annotations that link to the same KB entry co-refer.
 
@@ -630,13 +630,19 @@ We used this approach first in the TREC 2003 QA track assessments.\autocite{voor
 
 The nugget approach became a subject of research and then a standard method of evaluating text extracts or summaries.\autocite{lin_evaluating_2005}.  Later, the pyramid method was proposed to score nuggets (``summary content units'' or SCUs) with different value to the user.\autocite{nenkova_pyramid_2007} 
 
-For the TREC novelty track, we asked systems to identify sentences in an article that contained novel relevant information with respect to what was previously mentioned in the article.\autocite{soboroff_novelty_2005}
+For the TREC novelty track, we asked systems to identify sentences in an article that contained novel relevant information with respect to what was previously mentioned in the article.\autocite{soboroff_novelty_2005}  We qualified novelty to refer to relevant information, that is, information that the user would include in a report on the topic.  With novelty thus constrained, the assessor could work through sentences in a news article and not find that they were all novel.
 
 \section{Implicit relevance assessment}
 
+Implicit feedback is the bread and butter of web search engines and other web applications.  The system observes user clicks, dwell times (time spent on a page), scrolling behavior, backtracking vs browsing forward, etc.  These features are then used to train a model that predicts relevance (or the site equivalent) from behavior.
+
+We don't use these cues with assessors, since because they are being paid to assess the documents, giving explicit feedback isn't too much to ask.  Implicit behavior cues might be useful for checking for consistency --- if the assessor's judgment disagrees with our prediction based on behavior, we could confirm the judgment or add the document to a set to be double-checked later.
+
+Implicit feedback could be used with actual search users who consent to do {\bf some} assessment.  A proxy watches their search behavior, and then at the end of a session or the end of the day, asks the user about a few predicted relevant and irrelevant items.  It's important to ask for both because the user might be inclined to think retrospectively that anything suggested by the machine must be relevant somehow.
+
 \section{Minimizing error}
 
-It's inevitable that assessors make errors in the relevance labeling process.
+It's inevitable that assessors make errors in the relevance labeling process.  How can we design the assessment process and interface to minimize the chances of errors?
 
 \section{Maximizing consistency}
 
