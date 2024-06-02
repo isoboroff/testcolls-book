@@ -277,6 +277,7 @@ An example of the evolution of a task is what's now called ``semantic search''. 
 The articulation of the task gives the setting for information needs, the origin and structure of documents being searched, and the background and urgency level of the user.  It motivates the choices of document set and metrics.  It shapes the structure of the experiment we expect to perform with the test collection: what does the system know at what time, how does the query arrive, what is the response format.
 
 \section{Historical perspective}
+\label{sec:historical}
 
 Putting the task at the center of how we think of the test collection is a very modern perspective.\footnote{At least, I'm not aware of other books prior to this one that take this stance.}  In the Cranfield tests~\autocite{cleverdon_chapter_1966} the initial interest was in improving the efficiency of manual indexing, that is, people assigning categories and subject keywords to documents, without considering the goals or needs of searchers.  After their initial experiments, Cleverdon rapidly realized that any indexing scheme would affect search effectiveness in terms of recall and precision, and thus closer attention was paid to the questions asked by searchers.
 
@@ -293,7 +294,7 @@ To overcome the precision bias, Cleverdon asked the authors to frame the paper's
 
 So through an elicitation process, a task was developed, which was that a researcher would be asking questions of the literature in the course of planning an experiment or course of research.  The difficulty of tying questions closely to documents was not fully understood until much later, when test collections were larger and queries could come from external sources, but the core task, recall-oriented search for relevant research papers, remained.
 
-In their report on the `ideal' test collection, Sparch Jones and Van Rijsbergen considered search modalities, goals, and types of users.  They identified four search search modalities: ``retrospective searching'', which was one request posed against a static document collection; ``SDI [selective dissemination of information] searching'', where a request is repeated against successive sets of documents; ``iterative searching'', where the request is modified between multiple searches based on the results; and ``multifarious searching'' which was thought of as a mixture of the above.\autocite{sparck_jones_report_1975}  I call these ``modalities'' rather than tasks because they are purely mechanical search procedures.  Alongside these they named, but did not specify, several abstract tasks: data retrieval, fact retrieval, document retrieval, and computer-aided instruction.  Requests could be verbal or start from a source document (which may or may not be relevant to the request).  Lastly, the notion of a "request" centered on a single information need, which might itself result in a number of search queries depending on the capabilities of the system.
+In their report on the `ideal' test collection, Sparck Jones and Van Rijsbergen considered search modalities, goals, and types of users.  They identified four search search modalities: ``retrospective searching'', which was one request posed against a static document collection; ``SDI [selective dissemination of information] searching'', where a request is repeated against successive sets of documents; ``iterative searching'', where the request is modified between multiple searches based on the results; and ``multifarious searching'' which was thought of as a mixture of the above.\autocite{sparck_jones_report_1975}  I call these ``modalities'' rather than tasks because they are purely mechanical search procedures.  Alongside these they named, but did not specify, several abstract tasks: data retrieval, fact retrieval, document retrieval, and computer-aided instruction.  Requests could be verbal or start from a source document (which may or may not be relevant to the request).  Lastly, the notion of a "request" centered on a single information need, which might itself result in a number of search queries depending on the capabilities of the system.
 
 \section{Tasks in test collections}
 
@@ -587,6 +588,7 @@ Here is an example of a graded relevance scale where the grades are closely alig
 In this scale, the distinctions between each level are clearly specified, and the levels are tied to the goals of the user's task.  The assessor has a repeatable framework for deciding which relevance category applies.  Moreover, since the levels are tied to the task, we can assign gain values or other notions of utility that come from studies of the task or the model of the user.
 
 \section{Interface considerations}
+\label{sec:interface-considerations}
 
 A well-designed interface for collecting relevance assessments is almost as important as the specification of relevance itself.  The design considerations for an assessment interface are not complicated, though, and are straightforward to implement in any framework you happen to choose.  I know, because I've been writing such interfaces for years, mostly to work through a web browser, and while the widgets and event names change, the fundamental design hasn't.
 
@@ -642,7 +644,17 @@ Implicit feedback could be used with actual search users who consent to do {\bf 
 
 \section{Minimizing error}
 
-It's inevitable that assessors make errors in the relevance labeling process.  How can we design the assessment process and interface to minimize the chances of errors?
+It's inevitable that assessors make errors in the relevance labeling process.  How can we design the assessment process and interface to minimize the chances of errors?  I mentioned some ideas above in section~\ref{sec:interface-considerations}, and some of those are worth expanding on here.
+
+Good interface design is a good place to start.  Buttons for selecting relevance levels should be clear and cleanly separated from each other.  The levels should be clearly marked; avoid using something like ``1'' just to make the button fit better.  It should be obvious which document is being judged.
+
+The assessor should be able to see the work they've done, and to go back and make changes.  This is easy to support when the interface shows the pool as a scrollable list.  An alternative could be a history view.  The assessor will want to go back, and in my experience, when the interface doesn't support it, they tend to be more anxious about the quality of their work.
+
+Try to align the design of the interface with the workflow and the speed at which the assessor moves through it.  If we expect the assessor to move quickly through items, for example if the items are short, like passages or tweets, then it's important to minimize mouse motion to avoid repetitive stress injuries.  The number of actions the assessor should need to take to make an individual judgment should be low.  It's a strange way to think about it, but think of keyboard or button controller interfaces for games.  Movement keys are often under one hand, action keys under the other, and they are re-mappable.
+
+Keyboard shortcuts are useful, but since it's easy to hit the wrong key, this should really be tied to a way for the assessor to see what they've done and make corrections if need be.
+
+One idea that hasn't been explored very much is comparing a judged document to previous judgments to try and spot an error.  For example, we might guess that if the documents are very similar, they probably have the same relevance to the user.  But be careful; web pages for example can share a lot of boilerplate and the critical information could be small in comparison to the rest of the text on the page.  Back in 2005 (unpublished) I implemented a near-duplicate detection tool using shingling and locality-sensitive hashing.  It found dozens of candidate pairs with different judgments, but when I manually reviewed them, only three were true errors, and the rest were false positives.  You don't want to use a tool with that high an error rate as part of relevance assessment.
 
 \section{Maximizing consistency}
 
@@ -680,11 +692,56 @@ Rather than using a metric that averages across intents, it might make more sens
 
 \chapter{Topic development} \label{topic-development}
 
+The {\em topic} represents an expression of a user's information need.  TREC topics traditionally include a {\em title}, which is 3--5 words and is often treated as a query, a {\em description}, a sentence-length elicitation of the need, and a {\em narrative} that gives more details including setting boundaries on what the user would consider to be on-topic.  Some tracks have had more or less verbose topics; in some web tracks, there was only a short query, and in the legal track there was a long description accompanied by an enormous Boolean query.
+
+But where do the topics come from?  We would like the topics in a test collection to be representative of some group of real users.  Who are those users? Compared to web search queries, where ``head'' queries occur most often and ``tail queries'' might only be seen once, Nick Craswell described TREC topics as ``torso queries''.\footnote{Personal communication}  So TREC topics don't resemble the most popular web searches, but rather less-common searches which might be more complex than head query searches.  In section\ref{sec:query-logs} below I discuss using web query logs as a source of topics.
+
+Of course, web searchers really encompass a wide range of tasks, and so this really comes down to covering a variety of information needs in the task at hand.  In that ``torso'' range of web queries, there are high-precision searches, searches from the middles of sessions which might be trying to drill deeper, searches with operators trying to prune a result set, and more.  Those queries represent an even broader range of possible tasks.
+
+Banks et al. found that the topics are the largest source of variance in a test collection experiment.\autocite{banks-over}  So creating and selecting topics has an outsize effect on the quality of a test collection as a measurement tool.
+
+Robertson and Kanoulas proposed that there is a universe of topics, and the topics in a test collection represent a sample of those topics.\autocite{robertson_topic_variance} Thinking about the topic set as a sample gives us a better context to think about the inter-topic variance we see in experiments.  A straightforward approach to reducing that variance is to have more topics.  Another is refine the task definition more narrowly.  Since we can't characterize the universe of topics, it's hard to know exactly where a specific topic set is located in that space.
+
+As was discussed above (section~\ref{sec:historical}), in the Cranfield experiments, the topics (called ``search questions'') were created by selecting a starting document at random, and asking the author of that document\footnote{The Cranfield documents are abstracts of journal articles in the area of aeronautics.} to provide the questions that drove them to the work in the paper as well as three supplementary questions that arose over the course of the work.  This process ensured that the topics spanned a sample of the target collection, if not the range of questions that might be asked of it.
+
+This chapter explores some different ways we have created topics in TREC.
+
 \section{Collection exploration}
+
+The primary approach we use is one of collection exploration. We index the documents and provide a simple search interface that lets an assessor look around the collection and explore whether topics of interest are at least present in the data.  After finding a candidate topic, they undertake a process of refinement, and produce a final topic.  The technical lead on the task then selects from these created topics to form the final topic set.
+
+A specific instance of the procedure looks like this:
+\begin{enumerate}
+    \item \label{item:idea} The assessor thinks of an idea for a topic.
+    \item They do one or a few initial searches to determine if there is any content in the collection about their topic idea.
+    \item \label{item:desc} Based on those searches, they compose an information need that is basically the description field of the final topic.
+    \item The assessor then formulates one query for this topic and reviews the top 25 ranked documents returned by the system.  If the search returns less than one or two relevant documents, the topic is too small.  If there are more than 20 relevant in that search, the topic is too large.
+    \item If the topic is too small or too large, the assessor reformulates the information need to get the topic into the right neighborhood, or they reject the topic and start from step~\ref{item:idea}.
+    \item Once a topic is created and has more than one or two and less than 20 relevant documents in that one search, the assessor composes the narrative, which articulates the boundaries of what they will consider to be relevant.  Some of those boundaries were clear at step~\ref{item:desc}, others came about during their refining of the topic idea.
+\end{enumerate}
+
+Where do the initial ideas come from?  The assessor has a number of subjects that they are interested in, usually related to hobbies, cultural interests, or stories in the news.  We give them an almanac from the epoch of the collection (in the old days) or point them to the Wikipedia current events portal (nowadays) as places to find news-oriented ideas.  The idea, and the resulting topic, needs to have three characteristics:
+\begin{enumerate}
+    \item It has to have at least some relevant documents in the collection.
+    \item It can't have too many relevant documents, otherwise we can't hope to recover a sufficient sample of those during the pooling process.
+    \item It has to be on a subject the assessor won't mind reading 1000 to 2000 articles about during relevance assessment.
+\end{enumerate}
+
+This last is an important consideration.  A particularly bloody and disastrous event might be really newsy and interesting, but  be very draining on the person to assess as they work the pool.\footnote{Once, after a run of three or four topics in that vein, the assessor told me their next topic was going to be about squirrels.  I didn't want topics about squirrels, but it was the detox they needed.}
+
+We usually have a team of five or six assessors creating topics for a new collection, and that helps inject a range of topical areas into the final set.
+
+The goldilocks criterion (not too big, not too small, but just right) is important for experimental reasons, but can make topic development challenging for some datasets.  It's not possible to build useful topics about the Monica Lewinsky scandal from news articles of that year, because there's simply too much, and any reasonable narrowing of the topic tends to go to zero or onee relevant document quickly.  Other long and intensely-reported stories have that character.
+
+Some have suggested that the small user set and the topic refinement process lead to very specific kinds of topics being developed, and those represent only a small subset of search tasks.  In fact, we don't really know how many users like these are out there, and we don't use topics that get refined to the point of feeling contrived.  This is a particular case of not being able to characterize the population of users and topics, and so we let the task be our inspiration.
+
 \section{Working from query logs}
+\label{sec:query-logs}
 \section{Random documents and backfits}
 
 This section is a stern warning on creating topics by selecting documents at random from the collection, or backfitting topics to documents found through search.  This last was actually how CRAN was built.  Don't do that.
+
+Bailey et al. used crowdsourcing to elicit queries for 100 topics in the TREC 2013-14 Web Tracks.\footnote{Actually, these web track collections topics do have a query, along with multiple subtopics. But these authors felt free to make their own queries anyway.}  They did this by first composing a user story for each topic that presented context for the information need.  Crowd workers read the backstory and provided queries they would use to search for information on the topic.  They then did their own relevance judgments on pools retrieved using the query variants.  The resulting test collection help show the impact of query variation in an IR experiment.\autocite{bailey-user-variability}\autocite{bailey-uqv-100}
 
 \chapter{Selecting documents to label}
 
