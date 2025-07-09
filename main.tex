@@ -107,6 +107,9 @@
 %\renewcommand\allcapsspacing[1]{{\addfontfeature{LetterSpace=15}#1}}
 %\renewcommand\smallcapsspacing[1]{{\addfontfeature{LetterSpace=10}#1}}
 
+\usepackage{color, soul}
+\newcommand{\todo}[1]{\marginnote{\hl{TODO #1}}}
+
 \begin{document}
   
 % Front matter
@@ -543,13 +546,65 @@ In my experience, it seems to me that multi-valued relevance scales are frequent
 
 By introducing multiple levels of relevance, we are saying that the distinctions between levels is important to the user as they perform their task, and that systems that learn to distinguish them will be helpful to the user.  If the levels are categories or levels on a single scale, then it seems that straightforward learning models could capture those relationships given enough of the right data, but a mixture of categories and scales would require a structured model informed by the task.
 
-task-oriented gradations
+It's certainly reasonable to craft graded relevance scales that align with the user task.  Consider the following scale for the traditional adhoc task.  Recall that in the adhoc task, the user is looking for any and all information about the topic, so that they can compile a report on the topic:
+
+\begin{itemize}
+\item The document is not relevant.
+\item The document is tangentially, partially, or minimally relevant.  It contains information that relates to the topic, but would not make a useful citation in your final report.
+\item The document contains information that should be included in a report on the topic.
+\item The document contains vital information that addresses a key concern motivating the report.
+\item The document will be a primary source in the report.
+\item The document contains information that could change the notion of relevance in the topic to a new direction.
+\end{itemize}
+
+These levels follow an increasing scale of usefulness to the user, as well as impact on the final report.
 
 \section{Interface considerations}
+
+When designing a system to collect relevance assessments, its worthwhile to pay attention to a number of user experience and interface design considerations.  I've found that careful design of the assessment tool has a tremendous impact on the quality of the data obtained.\footnote{These are experience findings, and not research findings.  Several of the suggestions here might make for good CHI or CHIIR studies.}
+
+First let's understand the assessing user task.  The assessor will read some large number of documents, hundreds or perhaps thousands, in sequence.  When reading, they will need to be able to see when a document is relevant easily.  In traditional pooling, the vast majority of documents are not relevant, and rule \#1 of computer science is to make the common case fast.  However, repetitive interface tasks need to be carefully designed to avoid repetitive stress injuries.\footnote{It's bad enough reading a thousand irrelevant documents, don't add injury to insult.}
+
+It's important that the assessor be able to refer easily to their topic description.  When reading many documents about a topic, it is easy to habituate a judgment call that might not be well supported by the topic itself.  Assessors need to be careful to adhere to the statement of information need that was used to generate the pool of documents being judged.  In a post-hoc pooling setup it is too late at this point to clarify grey areas in the narrative!
+
+The reading experience needs to be comfortable.  You should consider carefully how text is displayed, what font is used, and if whitespace is properly retained.  Documents that are hard to read will be hard to judge.  In the original TREC Terabyte track .GOV collection, there are a large number of PDF documents, and those documents were displayed to the assessors as extracted text rather than the original PDF.  The collection was a crawl of government websites, so these PDF documents were usually quite long.  And as if that wasn't bad enough, these documents all appeared in the pool at a large clump near the end.\footnote{The PDFs were crawled in a second pass, and so were assigned document identifiers at the end of the collection, and the pools were sorted by document identifier to avoid system bias (see shortly).}
+
+A more common anti-example is assessing web pages.  It's often the case that the web pages are collected some time before to the relevance assessment task,\footnote{Remember, impactful datasets are used for many many years.} and since the web changes, associated resources for rendering such as style sheets, images, and scripts may have changed or disappeared altogether.  This can cause web pages to render badly, sometimes obscuring body text to the point that it's unreadable.  One solution to this problem is to crawl all the supporting content when the pages are collected.  Another solution is to pre-render web pages at crawl time, but beware of using an image of a page whose resolution makes it hard to read.
+
+You should try to include interface features that support skimming.  A familiar example is find-in-page, where the user can quickly search for an arbitrary string in the current document.  Don't rely on a web browser's support for this, as the browser will also hit header, footer, and margin text that isn't in the document being judged.  Another approach to this is what we call ``scan terms'': allow the user a text entry box where they can put any words they like, and have those words automatically highlighted in every document.  If the user has a trackpad or mouse that supports fast scrolling, then it's easy to skim to the next occurrence of a scan term.  It's important that words used in this way be selected by the assessor, rather than automatically taken from the topic statement; using topic terms automatically will bias skimming to documents that match the topic words, and what we want to do is allow the assessor to skim for relevance cues that are useful to them, not debug the systems.
+
+It should be easy to make a relevance judgment.  If your interface uses buttons that the user clicks with a mouse, consider adding keyboard shortcuts.  Remember that most documents are not relevant, so moving between a ``next-document'' button and a ``not-relevant'' button can be repetitive.
+
+Remember Fitts' Law: ``the time required to rapidly move to a target area is a function of the ratio between the distance to the target and the width of the target.''\footnote{\url{https://en.wikipedia.org/wiki/Fitts's_law}}.  It is harder to click on small buttons, especially if the pointer has to move a long way to get to them.  Stock HTML for radio buttons, for example, make the little circle button clickable but not the label; including the label, or just using a text button that keeps its color, makes the button easier to hit.
+
+Keep in mind the demographics of your assessor population.  Our assessors are typically retirees, and so our interfaces are designed around that demographic: it's easy to resize the fonts without disrupting the interface, buttons are large and easy to find, the text is clear and easy to read.  Some user populations might benefit from interfaces that limit distractions --- muting notifications, limiting the number of windows on a screen.  Some users may be using a laptop with a small screen, others might have enormous monitors on their desks.
+
+I once wrote a console-driven assessment tool for myself, but I would never put that interface in front of real users.  Remember as the developer and/or the scientist, you are probably not the person who will do the relevance assessments.  Design for them, not for you.
+
+Look out for interface features (or misfeatures) that can bias relevance judgments towards particular systems, retrieval models, or document types.  We sorted pools by document identifier to avoid bias towards systems, but that assumed that those identifiers were not confounded with relevance at all.  Better sorts are available that support consistency; see below.  \todo{I think Tetsuya has a very recent paper that shows the advantage of score-sorting the pool, without bias.}
+
+In my experience, assessors like the ability to go back and change an assessment they made.  As such, our assessment tools present the pool as a list they can freely navigate.  Some assessment optimization procedures like feedback-driven assessment assume no backtracking, where a better design would be to retain judgment states and allow the assessor to make corrections.
+
+The interface should not allow the assessor make an error, and should look out for possible errors.  For example, since our pool is a list, it's easy to accidentally skip a document.  As a result, the interface warns them if they leave a pool with unjudged documents, and has list filters to narrow the view to unjudged or relevant documents only.
+
 \section{Multiple stages of assessment}
 \section{Implicit relevance assessment}
 \section{Minimizing error}
 \section{Maximizing consistency}
+
+Assessors will do a better job of assessing, and feel more confident in their work, if the assessment setup supports consistency.  Consistency is making similar relevance judgments about similar documents, and also the ability to recognize when that similarity loses relevance.
+
+Consistency is difficult because many documents may be similar to each other, but they still might not be equally relevant.  One example of this is a set of pages from the same website.  Each page will include a number of identical or similar elements, such as navbars, breadcrumbs, tables of contents, headers and footers, and in fact only a small part of each page may be devoted to the actual content of that page.  Shingling and other algorithms to detect near-duplicates may cluster all these pages together, but it might be the small but critical central text on a page that makes that page relevant.  Recall the TREC relevance criterion: even a single relevant sentence is enough to judge a document relevant.
+
+Another example is social media data such as tweets.  The nature of social media is that people share and re-share, so very similar content can appear in very similar-looking documents.  In Twitter's early days, ``re-tweets'', where a user re-shared a tweet, were only labeled by the convention of starting with ``RT'' (or the equivalent in the local language), and only later were retweets labeled in the database.  Deciding whether retweets are relevant is very task-dependent, but in any event the assessor needs to be able to identify and distinguish them.
+
+In the majority of our tools at NIST, the assessor is presented with a pool of documents to review in a scrollable sidebar.  Often that sidebar includes the buttons for assigning judgments, and a visual indication of what judgment was made.  This setup supports the assessor's immediate context, being able to keep track of what was done recently.  Since the sidebar reflects the global state of judgments they've made, the assessor can go back and review documents that are close to each other in the pool.  Reviewing documents further away in the pool is more difficult.  So one implication of this design is that if we think assessors will want to make comparisons, we should put the items likely to need comparison close to each other in the pool view.
+
+URL sorts
+
+Tweet shingle sorts
+
+
 \section{Detecting errors and inconsistencies}
 \section{Agreement revisited}
 \begin{itemize}
