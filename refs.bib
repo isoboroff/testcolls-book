@@ -1,3 +1,13 @@
+@inproceedings{buckley_query_track_trec9,
+  author =       {Chris Buckley},
+  title =        {The {TREC-9} Query Track},
+  booktitle = {Proceedings of the Ninth Text {REtrieval} Conference},
+  year =      2000,
+  editor =    {E. M. Voorhees and D. K. Harman},
+  number =    {500-249},
+  series =    {NIST SP},
+  address =   {Gaithersburg and MD, USA},
+  organization = {National Institute of Standards and Technology}}
 
 @article{zuccon_crowdsourcing_2013,
 	title = {Crowdsourcing interactions: using crowdsourcing for evaluating interactive information retrieval systems},
@@ -26,7 +36,6 @@
 	series = {{SIGIR} '07},
 	abstract = {Test collections are most useful when they are reusable, that is, when they can be reliably used to rank systems that did not contribute to the pools. Pooled relevance judgments for very large collections may not be reusable for two easons: they will be very sparse and not sufficiently complete, and they may be biased in the sense that theywill unfairly rank some class of systems. The {TREC} 2006 terabyte track judged both a pool and a deep random sample in order to measure the effects of sparseness and bias.},
 	pages = {785--786},
-	booktitle = {Proceedings of the 30th annual international {ACM} {SIGIR} conference on Research and development in information retrieval},
 	publisher = {{ACM}},
 	author = {Soboroff, Ian},
 	urldate = {2013-07-11},
@@ -44,7 +53,6 @@
 	series = {{SIGIR} '06},
 	shorttitle = {Dynamic test collections},
 	pages = {276--283},
-	booktitle = {Proceedings of the 29th annual international {ACM} {SIGIR} conference on Research and development in information retrieval},
 	publisher = {{ACM}},
 	author = {Soboroff, Ian},
 	urldate = {2013-07-11},
@@ -80,7 +88,6 @@
 	doi = {10.1145/290941.291009},
 	series = {{SIGIR} '98},
 	pages = {282--289},
-	booktitle = {Proceedings of the 21st annual international {ACM} {SIGIR} conference on Research and development in information retrieval},
 	publisher = {{ACM}},
 	author = {Cormack, Gordon V. and Palmer, Christopher R. and Clarke, Charles L. A.},
 	urldate = {2013-07-14},
@@ -97,7 +104,6 @@
 	series = {{SIGIR} '11},
 	abstract = {Test collections are the primary drivers of progress in information retrieval. They provide yardsticks for assessing the effectiveness of ranking functions in an automatic, rapid, and repeatable fashion and serve as training data for learning to rank models. However, manual construction of test collections tends to be slow, labor-intensive, and expensive. This paper examines the feasibility of constructing web search test collections in a completely unsupervised manner given only a large web corpus as input. Within our proposed framework, anchor text extracted from the web graph is treated as a pseudo query log from which pseudo queries are sampled. For each pseudo query, a set of relevant and non-relevant documents are selected using a variety of web-specific features, including spam and aggregated anchor text weights. The automatically mined queries and judgments form a pseudo test collection that can be used for training ranking functions. Experiments carried out on {TREC} web track data show that learning to rank models trained using pseudo test collections outperform an unsupervised ranking function and are statistically indistinguishable from a model trained using manual judgments, demonstrating the usefulness of our approach in extracting reasonable quality training data "for free".},
 	pages = {1073--1082},
-	booktitle = {Proceedings of the 34th international {ACM} {SIGIR} conference on Research and development in Information Retrieval},
 	publisher = {{ACM}},
 	author = {Asadi, Nima and Metzler, Donald and Elsayed, Tamer and Lin, Jimmy},
 	urldate = {2013-07-19},
@@ -280,7 +286,6 @@
 	series = {{SIGIR} '06},
 	abstract = {We consider the problem of evaluating retrieval systems using a limited number of relevance judgments. Recent work has demonstrated that one can accurately estimate average precision via a judged pool corresponding to a relatively small random sample of documents. In this work, we demonstrate that given values or estimates of average precision, one can accurately infer the relevances of unjudged documents. Combined, we thus show how one can efficiently and accurately infer a large judged pool from a relatively small number of judged documents, thus permitting accurate and efficient retrieval evaluation on a large scale.},
 	pages = {601--602},
-	booktitle = {Proceedings of the 29th annual international {ACM} {SIGIR} conference on Research and development in information retrieval},
 	publisher = {{ACM}},
 	author = {Aslam, Javed A. and Yilmaz, Emine},
 	urldate = {2013-07-11},
@@ -298,7 +303,6 @@
 	series = {{SIGIR} '06},
 	abstract = {We consider the problem of large-scale retrieval evaluation, and we propose a statistical method for evaluating retrieval systems using incomplete judgments. Unlike existing techniques that (1) rely on effectively complete, and thus prohibitively expensive, relevance judgment sets, (2) produce biased estimates of standard performance measures, or (3) produce estimates of non-standard measures thought to be correlated with these standard measures, our proposed statistical technique produces unbiased estimates of the standard measures themselves.Our proposed technique is based on random sampling. While our estimates are unbiased by statistical design, their variance is dependent on the sampling distribution employed; as such, we derive a sampling distribution likely to yield low variance estimates. We test our proposed technique using benchmark {TREC} data, demonstrating that a sampling pool derived from a set of runs can be used to efficiently and effectively evaluate those runs. We further show that these sampling pools generalize well to unseen runs. Our experiments indicate that highly accurate estimates of standard performance measures can be obtained using a number of relevance judgments as small as 4\% of the typical {TREC}-style judgment pool.},
 	pages = {541--548},
-	booktitle = {Proceedings of the 29th annual international {ACM} {SIGIR} conference on Research and development in information retrieval},
 	publisher = {{ACM}},
 	author = {Aslam, Javed A. and Pavlu, Virgil and Yilmaz, Emine},
 	urldate = {2013-07-11},
@@ -316,7 +320,6 @@
 	series = {{SIGIR} '08},
 	abstract = {In the field of information retrieval, one is often faced with the problem of computing the correlation between two ranked lists. The most commonly used statistic that quantifies this correlation is Kendall's Τ. Often times, in the information retrieval community, discrepancies among those items having high rankings are more important than those among items having low rankings. The Kendall's Τ statistic, however, does not make such distinctions and equally penalizes errors both at high and low rankings. In this paper, we propose a new rank correlation coefficient, {AP} correlation (Τap), that is based on average precision and has a probabilistic interpretation. We show that the proposed statistic gives more weight to the errors at high rankings and has nice mathematical properties which make it easy to interpret. We further validate the applicability of the statistic using experimental data.},
 	pages = {587--594},
-	booktitle = {Proceedings of the 31st annual international {ACM} {SIGIR} conference on Research and development in information retrieval},
 	publisher = {{ACM}},
 	author = {Yilmaz, Emine and Aslam, Javed A. and Robertson, Stephen},
 	urldate = {2013-07-11},
@@ -334,7 +337,6 @@
 	series = {{SIGIR} '03},
 	abstract = {Soboroff, Nicholas and Cahan recently proposed a method for evaluating the performance of retrieval systems without relevance judgments. They demonstrated that the system evaluations produced by their methodology are correlated with actual evaluations using relevance judgments in the {TREC} competition. In this work, we propose an explanation for this phenomenon. We devise a simple measure for quantifying the similarity of retrieval systems by assessing the similarity of their retrieved results. Then, given a collection of retrieval systems and their retrieved results, we use this measure to assess the average similarity of a system to the other systems in the collection. We demonstrate that evaluating retrieval systems according to average similarity yields results quite similar to the methodology proposed by Soboroff et{\textbackslash}textasciitildeal., and we further demonstrate that these two techniques are in fact highly correlated. Thus, the techniques are effectively evaluating and ranking retrieval systems by "popularity" as opposed to "performance.},
 	pages = {361--362},
-	booktitle = {Proceedings of the 26th annual international {ACM} {SIGIR} conference on Research and development in informaion retrieval},
 	publisher = {{ACM}},
 	author = {Aslam, Javed A. and Savell, Robert},
 	urldate = {2013-07-11},
@@ -370,7 +372,6 @@
 	series = {{SIGIR} '08},
 	abstract = {Information retrieval evaluation has typically been performed over several dozen queries, each judged to near-completeness. There has been a great deal of recent work on evaluation over much smaller judgment sets: how to select the best set of documents to judge and how to estimate evaluation measures when few judgments are available. In light of this, it should be possible to evaluate over many more queries without much more total judging effort. The Million Query Track at {TREC} 2007 used two document selection algorithms to acquire relevance judgments for more than 1,800 queries. We present results of the track, along with deeper analysis: investigating tradeoffs between the number of queries and number of judgments shows that, up to a point, evaluation over more queries with fewer judgments is more cost-effective and as reliable as fewer queries with more judgments. Total assessor effort can be reduced by 95\% with no appreciable increase in evaluation errors.},
 	pages = {651--658},
-	booktitle = {Proceedings of the 31st annual international {ACM} {SIGIR} conference on Research and development in information retrieval},
 	publisher = {{ACM}},
 	author = {Carterette, Ben and Pavlu, Virgil and Kanoulas, Evangelos and Aslam, Javed A. and Allan, James},
 	urldate = {2013-07-11},
@@ -388,7 +389,6 @@
 	series = {{SIGIR} '08},
 	abstract = {We consider the problem of large scale retrieval evaluation. Recently two methods based on random sampling were proposed as a solution to the extensive effort required to judge tens of thousands of documents. While the first method proposed by Aslam et al. [1] is quite accurate and efficient, it is overly complex, making it difficult to be used by the community, and while the second method proposed by Yilmaz et al., {infAP} [14], is relatively simple, it is less efficient than the former since it employs uniform random sampling from the set of complete judgments. Further, none of these methods provide confidence intervals on the estimated values. The contribution of this paper is threefold: (1) we derive confidence intervals for {infAP}, (2) we extend {infAP} to incorporate nonrandom relevance judgments by employing stratified random sampling, hence combining the efficiency of stratification with the simplicity of random sampling, (3) we describe how this approach can be utilized to estimate {nDCG} from incomplete judgments. We validate the proposed methods using {TREC} data and demonstrate that these new methods can be used to incorporate nonrandom samples, as were available in {TREC} Terabyte track '06.},
 	pages = {603--610},
-	booktitle = {Proceedings of the 31st annual international {ACM} {SIGIR} conference on Research and development in information retrieval},
 	publisher = {{ACM}},
 	author = {Yilmaz, Emine and Kanoulas, Evangelos and Aslam, Javed A.},
 	urldate = {2013-07-11},
@@ -406,7 +406,6 @@
 	series = {{SIGIR} '98},
 	abstract = {Two stages in measurement of techniques for information retrieval are gathering of documents for relevance assessment and use of the assessments to numerically evaluate effectiveness. We consider both of these stages in the context of the {TREC} experiments, to determine whether they lead to measurements that are trustworthy and fair. Our detailed empirical investigation of the {TREC} results shows that the measured relative performance of systems appears to be reliable, but that recall is overestimated: it is likely that many relevant documents have not been found. We propose a new pooling strategy that can significantly in- crease the number of relevant documents found for given effort, without compromising fairness.},
 	pages = {307--314},
-	booktitle = {Proceedings of the 21st annual international {ACM} {SIGIR} conference on Research and development in information retrieval},
 	publisher = {{ACM}},
 	author = {Zobel, Justin},
 	urldate = {2013-07-11},
@@ -430,7 +429,7 @@
 	date = {2005},
 	note = {event-place: New York, {NY}, {USA}},
 	keywords = {duplicate detection, novelty, search effectiveness},
-	file = {ACM Full Text PDF:/Users/soboroff/Zotero/storage/IZQ35DHI/Bernstein and Zobel - 2005 - Redundant documents and search effectiveness.pdf:application/pdf}
+	file = {ACM Full Text PDF:/Users/soboroff/Zotero/storage/IZQ35DHI/Bernstein and Zobel - 2005 - Redundant documents and search effectiveness.pdf:application/pdf;p1-nenkova.pdf:/Users/soboroff/Zotero/storage/SAIUVYRJ/p1-nenkova.pdf:application/pdf}
 }
 
 @inproceedings{voorhees_philosophy_2002,
@@ -454,7 +453,6 @@
 	doi = {10.1145/290941.291017},
 	series = {{SIGIR} '98},
 	pages = {315--323},
-	booktitle = {Proceedings of the 21st annual international {ACM} {SIGIR} conference on Research and development in information retrieval},
 	publisher = {{ACM}},
 	author = {Voorhees, Ellen M.},
 	urldate = {2013-07-11},
@@ -481,7 +479,6 @@
 	series = {{SIGIR} '00},
 	abstract = {This paper presents a novel way of examining the accuracy of the evaluation measures commonly used in information retrieval experiments. It validates several of the rules-of-thumb experimenters use, such as the number of queries needed for a good experiment is at least 25 and 50 is better, while challenging other beliefs, such as the common evaluation measures are equally reliable. As an example, we show that Precision at 30 documents has about twice the average error rate as Average Precision has. These results can help information retrieval researchers design experiments that provide a desired level of confidence in their results. In particular, we suggest researchers using Web measures such as Precision at 10 documents will need to use many more than 50 queries or will have to require two methods to have a very large difference in evaluation scores before concluding that the two methods are actually different.},
 	pages = {33--40},
-	booktitle = {Proceedings of the 23rd annual international {ACM} {SIGIR} conference on Research and development in information retrieval},
 	publisher = {{ACM}},
 	author = {Buckley, Chris and Voorhees, Ellen M.},
 	urldate = {2013-07-11},
@@ -514,7 +511,6 @@
 	series = {{SIGIR} '01},
 	abstract = {The most prevalent experimental methodology for comparing the effectiveness of information retrieval systems requires a test collection, composed of a set of documents, a set of query topics, and a set of relevance judgments indicating which documents are relevant to which topics. It is well known that relevance judgments are not infallible, but recent retrospective investigation into results from the Text {REtrieval} Conference ({TREC}) has shown that differences in human judgments of relevance do not affect the relative measured performance of retrieval systems. Based on this result, we propose and describe the initial results of a new evaluation methodology which replaces human relevance judgments with a randomly selected mapping of documents to topics which we refer to aspseudo-relevance judgments.Rankings of systems with our methodology correlate positively with official {TREC} rankings, although the performance of the top systems is not predicted well. The correlations are stable over a variety of pool depths and sampling techniques. With improvements, such a methodology could be useful in evaluating systems such as World-Wide Web search engines, where the set of documents changes too often to make traditional collection construction techniques practical.},
 	pages = {66--73},
-	booktitle = {Proceedings of the 24th annual international {ACM} {SIGIR} conference on Research and development in information retrieval},
 	publisher = {{ACM}},
 	author = {Soboroff, Ian and Nicholas, Charles and Cahan, Patrick},
 	urldate = {2013-07-11},
@@ -531,7 +527,6 @@
 	series = {{SIGIR} '04},
 	abstract = {Many common web searches by their nature have a very small number of relevant documents. Homepage and "namedpage" searching are known-item searches where there is only a single relevant document. Topic distillation is a special kind of topical relevance search where the user wishes to find a few key web sites rather than every relevant web page. Because these types of searches are so common, web search evaluations have come to focus on tasks where there are very few relevant documents. Evaluations with few relevant documents pose special challenges for current metrics. In particular, the {TREC} 2003 topic distillation evaluation is unable to distinguish most submitted runs from each other.},
 	pages = {530--531},
-	booktitle = {Proceedings of the 27th annual international {ACM} {SIGIR} conference on Research and development in information retrieval},
 	publisher = {{ACM}},
 	author = {Soboroff, Ian},
 	urldate = {2013-07-11},
@@ -549,7 +544,6 @@
 	series = {{SIGIR} '07},
 	abstract = {Information retrieval evaluation based on the pooling method is inherently biased against systems that did not contribute to the pool of judged documents. This may distort the results obtained about the relative quality of the systems evaluated and thus lead to incorrect conclusions about the performance of a particular ranking technique. We examine the magnitude of this effect and explore how it can be countered by automatically building an unbiased set of judgements from the original, biased judgements obtained through pooling. We compare the performance of this method with other approaches to the problem of incomplete judgements, such as bpref, and show that the proposed method leads to higher evaluation accuracy, especially if the set of manual judgements is rich in documents, but highly biased against some systems.},
 	pages = {63--70},
-	booktitle = {Proceedings of the 30th annual international {ACM} {SIGIR} conference on Research and development in information retrieval},
 	publisher = {{ACM}},
 	author = {Büttcher, Stefan and Clarke, Charles L. A. and Yeung, Peter C. K. and Soboroff, Ian},
 	urldate = {2013-07-11},
@@ -568,7 +562,6 @@
 	shorttitle = {Relevance assessment},
 	abstract = {We investigate to what extent people making relevance judgements for a reusable {IR} test collection are exchangeable. We consider three classes of judge: "gold standard" judges, who are topic originators and are experts in a particular information seeking task; "silver standard" judges, who are task experts but did not create topics; and "bronze standard" judges, who are those who did not define topics and are not experts in the task. Analysis shows low levels of agreement in relevance judgements between these three groups. We report on experiments to determine if this is sufficient to invalidate the use of a test collection for measuring system performance when relevance assessments have been created by silver standard or bronze standard judges. We find that both system scores and system rankings are subject to consistent but small differences across the three assessment sets. It appears that test collections are not completely robust to changes of judge when these judges vary widely in task and topic expertise. Bronze standard judges may not be able to substitute for topic and task experts, due to changes in the relative performance of assessed systems, and gold standard judges are preferred.},
 	pages = {667--674},
-	booktitle = {Proceedings of the 31st annual international {ACM} {SIGIR} conference on Research and development in information retrieval},
 	publisher = {{ACM}},
 	author = {Bailey, Peter and Craswell, Nick and Soboroff, Ian and Thomas, Paul and de Vries, Arjen P. and Yilmaz, Emine},
 	urldate = {2013-07-11},
@@ -586,7 +579,6 @@
 	series = {{SIGIR} '03},
 	abstract = {Test collections for the filtering track in {TREC} have typically used either past sets of relevance judgments, or categorized collections such as Reuters Corpus Volume 1 or {OHSUMED}, because filtering systems need relevance judgments during the experiment for training and adaptation. For {TREC} 2002, we constructed an entirely new set of search topics for the Reuters Corpus for measuring filtering systems. Our method for building the topics involved multiple iterations of feedback from assessors, and fusion of results from multiple search systems using different search algorithms. We also developed a second set of "inexpensive" topics based on categories in the document collection. We found that the initial judgments made for the experiment were sufficient; subsequent pooled judging changed system rankings very little. We also found that systems performed very differently on the category topics than on the assessor-built topics.},
 	pages = {243--250},
-	booktitle = {Proceedings of the 26th annual international {ACM} {SIGIR} conference on Research and development in informaion retrieval},
 	publisher = {{ACM}},
 	author = {Soboroff, Ian and Robertson, Stephen},
 	urldate = {2013-07-11},
@@ -686,7 +678,6 @@
 	series = {{SIGIR} '01},
 	abstract = {Much system-oriented evaluation of information retrieval systems has used the Cranfield approach based upon queries run against test collections in a batch mode. Some researchers have questioned whether this approach can be applied to the real world, but little data exists for or against that assertion. We have studied this question in the context of the {TREC} Interactive Track. Previous results demonstrated that improved performance as measured by relevance-based metrics in batch studies did not correspond with the results of outcomes based on real user searching tasks. The experiments in this paper analyzed those results to determine why this occurred. Our assessment showed that while the queries entered by real users into systems yielding better results in batch studies gave comparable gains in ranking of relevant documents for those users, they did not translate into better performance on specific tasks. This was most likely due to users being able to adequately find and utilize relevant documents ranked further down the output list.},
 	pages = {225--231},
-	booktitle = {Proceedings of the 24th Annual International {ACM} {SIGIR} Conference on Research and Development in Information Retrieval},
 	publisher = {{ACM}},
 	author = {Turpin, Andrew H. and Hersh, William},
 	urldate = {2018-12-30},
@@ -704,7 +695,6 @@
 	abstract = {Given the size of the w eb,the search engine industry has argued that engines should be evaluated by their ability to retrieve highly relevant pages rather than all possible relevant pages. T o explore the role highly relevant documents play in retrieval system evaluation, assessors for the {TREC}-9 w eb track used a three-point relevance scale and also selected best pages for each topic. The relative e ectiv eness of runs evaluated by di erent relevant document sets differed, con rming the hypothesis that di erent retrieval techniques work better for retrieving highly relevant documents. Yet evaluating by highly relevant documents can be unstable since there are relatively few highly relevant documents. {TREC} assessors frequently disagreed in their selection of the best page, and subsequent evaluation by best page across di erent assessors varied widely. The discounted cumulative gain measure introduced by Jarvelin and Kekalainen increases ev aluation stabiliyt by incorporating all relevance judgments while still giving precedence to highly relevant documents.},
 	eventtitle = {{SIGIR} 2001},
 	pages = {74--82},
-	booktitle = {Proceedings of the 24th annual international {ACM} {SIGIR} conference on Research and development in information retrieval},
 	publisher = {{ACM} Press},
 	author = {Voorhees, Ellen M.},
 	urldate = {2019-08-26},
@@ -786,8 +776,298 @@
 	file = {Full Text PDF:/Users/soboroff/Zotero/storage/TM3EDMVC/Järvelin and Kekäläinen - 2002 - Cumulated gain-based evaluation of IR techniques.pdf:application/pdf}
 }
 
-@Book{kohavi_trustworthy_2020,
-  author =    {Ron Kohavi and Diang Tang and Ya Xu},
-  title =        {Trustworthy Online Controlled Experiments: a Practical Guide to {A/B} Testing},
-  publisher =    {Cambridge University Press},
-  year =         2020}
+@inproceedings{broder_syntactic_1997,
+	location = {{GBR}},
+	title = {Syntactic clustering of the Web},
+	pages = {1157--1166},
+	booktitle = {Selected papers from the sixth international conference on World Wide Web},
+	publisher = {Elsevier Science Publishers Ltd.},
+	author = {Broder, Andrei Z. and Glassman, Steven C. and Manasse, Mark S. and Zweig, Geoffrey},
+	urldate = {2021-02-04},
+	date = {1997-09-01},
+	keywords = {duplication resemblance, fingertips, signatures, similarity, Web search}
+}
+
+@inproceedings{carterette_effect_2010,
+	location = {New York, {NY}, {USA}},
+	title = {The effect of assessor error on {IR} system evaluation},
+	isbn = {978-1-4503-0153-4},
+	url = {https://doi.org/10.1145/1835449.1835540},
+	doi = {10.1145/1835449.1835540},
+	series = {{SIGIR} '10},
+	abstract = {Recent efforts in test collection building have focused on scaling back the number of necessary relevance judgments and then scaling up the number of search topics. Since the largest source of variation in a Cranfield-style experiment comes from the topics, this is a reasonable approach. However, as topic set sizes grow, and researchers look to crowdsourcing and Amazon's Mechanical Turk to collect relevance judgments, we are faced with issues of quality control. This paper examines the robustness of the {TREC} Million Query track methods when some assessors make significant and systematic errors. We find that while averages are robust, assessor errors can have a large effect on system rankings.},
+	pages = {539--546},
+	publisher = {Association for Computing Machinery},
+	author = {Carterette, Ben and Soboroff, Ian},
+	urldate = {2021-02-04},
+	date = {2010-07-19},
+	keywords = {assessor error, retrieval test collections},
+	file = {Full Text PDF:/Users/soboroff/Zotero/storage/B29CE65I/Carterette and Soboroff - 2010 - The effect of assessor error on IR system evaluati.pdf:application/pdf}
+}
+
+@article{oard_evaluation_2010,
+	title = {Evaluation of information retrieval for E-discovery},
+	volume = {18},
+	issn = {1572-8382},
+	url = {https://doi.org/10.1007/s10506-010-9093-9},
+	doi = {10.1007/s10506-010-9093-9},
+	abstract = {The effectiveness of information retrieval technology in electronic discovery (E-discovery) has become the subject of judicial rulings and practitioner controversy. The scale and nature of E-discovery tasks, however, has pushed traditional information retrieval evaluation approaches to their limits. This paper reviews the legal and operational context of E-discovery and the approaches to evaluating search technology that have evolved in the research community. It then describes a multi-year effort carried out as part of the Text Retrieval Conference to develop evaluation methods for responsive review tasks in E-discovery. This work has led to new approaches to measuring effectiveness in both batch and interactive frameworks, large data sets, and some surprising results for the recall and precision of Boolean and statistical information retrieval methods. The paper concludes by offering some thoughts about future research in both the legal and technical communities toward the goal of reliable, effective use of information retrieval in E-discovery.},
+	pages = {347--386},
+	number = {4},
+	journaltitle = {Artificial Intelligence and Law},
+	shortjournal = {Artif Intell Law},
+	author = {Oard, Douglas W. and Baron, Jason R. and Hedin, Bruce and Lewis, David D. and Tomlinson, Stephen},
+	urldate = {2021-02-04},
+	date = {2010-12-01},
+	langid = {english},
+	file = {Springer Full Text PDF:/Users/soboroff/Zotero/storage/L3HVREPI/Oard et al. - 2010 - Evaluation of information retrieval for E-discover.pdf:application/pdf}
+}
+
+@article{liu_overview_2014,
+	title = {Overview of the {NTCIR}-11 {IMine} Task},
+	abstract = {In this paper, we provide an overview of the {NTCIR} {IMine} task, which is a core task of {NTCIR}-11 and also a succeeding work of {INTENT}@{NTCIR}-9 and {INTENT}2@{NTCIR}-10 tasks. {IMine} is composed of a subtopic mining ({SM}) task, a document ranking ({DR}) task and a {TaskMine} ({TM}) pilot task. 21 groups from Canada, China, Germany, France, Japan, Korea, Spain, {UK} and United States registered to the task, which makes it one of the largest tasks in {NTCIR}-11. Finally, we receive 45 runs from 10 teams to the {SM} task, 25 runs from 6 groups to the {DR} task and 3 runs from 2 groups to the {TM} task. We describe the task details, annotation of results, evaluation strategies and then the official evaluation results for each subtask.},
+	pages = {16},
+	author = {Liu, Yiqun and Song, Ruihua and Zhang, Min and Dou, Zhicheng and Yamamoto, Takehiro and Kato, Makoto and Ohshima, Hiroaki and Zhou, Ke},
+	date = {2014},
+	langid = {english},
+	file = {Liu et al. - 2014 - Overview of the NTCIR-11 IMine Task.pdf:/Users/soboroff/Zotero/storage/W6RFSKKW/Liu et al. - 2014 - Overview of the NTCIR-11 IMine Task.pdf:application/pdf}
+}
+
+@inproceedings{clarke_novelty_2008,
+	location = {New York, {NY}, {USA}},
+	title = {Novelty and diversity in information retrieval evaluation},
+	isbn = {978-1-60558-164-4},
+	url = {https://doi.org/10.1145/1390334.1390446},
+	doi = {10.1145/1390334.1390446},
+	series = {{SIGIR} '08},
+	abstract = {Evaluation measures act as objective functions to be optimized by information retrieval systems. Such objective functions must accurately reflect user requirements, particularly when tuning {IR} systems and learning ranking functions. Ambiguity in queries and redundancy in retrieved documents are poorly reflected by current evaluation measures. In this paper, we present a framework for evaluation that systematically rewards novelty and diversity. We develop this framework into a specific evaluation measure, based on cumulative gain. We demonstrate the feasibility of our approach using a test collection based on the {TREC} question answering track.},
+	pages = {659--666},
+	publisher = {Association for Computing Machinery},
+	author = {Clarke, Charles L.A. and Kolla, Maheedhar and Cormack, Gordon V. and Vechtomova, Olga and Ashkan, Azin and Büttcher, Stefan and {MacKinnon}, Ian},
+	urldate = {2021-02-04},
+	date = {2008-07-20},
+	keywords = {test collections, evaluation, novelty},
+	file = {Full Text PDF:/Users/soboroff/Zotero/storage/D9XL75CY/Clarke et al. - 2008 - Novelty and diversity in information retrieval eva.pdf:application/pdf}
+}
+
+@inproceedings{sakai_which_2019,
+	location = {New York, {NY}, {USA}},
+	title = {Which Diversity Evaluation Measures Are "Good"?},
+	isbn = {978-1-4503-6172-9},
+	url = {https://doi.org/10.1145/3331184.3331215},
+	doi = {10.1145/3331184.3331215},
+	series = {{SIGIR}'19},
+	pages = {595--604},
+	publisher = {Association for Computing Machinery},
+	author = {Sakai, Tetsuya and Zeng, Zhaohao},
+	urldate = {2021-02-04},
+	date = {2019-07-18},
+	keywords = {evaluation measures, search result diversification, user preferences},
+	file = {Full Text PDF:/Users/soboroff/Zotero/storage/SIW7PY2Q/Sakai and Zeng - 2019 - Which Diversity Evaluation Measures Are Good.pdf:application/pdf}
+}
+
+@article{nenkova_pyramid_2007,
+	title = {The Pyramid Method: Incorporating human content selection variation in summarization evaluation},
+	volume = {4},
+	issn = {1550-4875, 1550-4883},
+	url = {https://dl.acm.org/doi/10.1145/1233912.1233913},
+	doi = {10.1145/1233912.1233913},
+	shorttitle = {The Pyramid Method},
+	pages = {4},
+	number = {2},
+	journaltitle = {{ACM} Transactions on Speech and Language Processing},
+	shortjournal = {{ACM} Trans. Speech Lang. Process.},
+	author = {Nenkova, Ani and Passonneau, Rebecca and {McKeown}, Kathleen},
+	urldate = {2021-02-05},
+	date = {2007-05},
+	langid = {english},
+	file = {Nenkova et al. - 2007 - The Pyramid Method Incorporating human content se.pdf:/Users/soboroff/Zotero/storage/HNKHKTLH/Nenkova et al. - 2007 - The Pyramid Method Incorporating human content se.pdf:application/pdf}
+}
+
+@article{voorhees_overview_2004,
+	title = {Overview of the {TREC} 2003 Question Answering Track},
+	abstract = {The {TREC} 2003 question answering track contained two tasks, the passages task and the main task. In the passages task, systems returned a single text snippet in response to factoid questions; the evaluation metric was the number of snippets that contained a correct answer. The main task contained three separate types of questions, factoid questions, list questions, and deﬁnition questions. Each of the questions was tagged as to its type and the different question types were evaluated separately. The ﬁnal score for a main task run was a combination of the scores for the separate question types.},
+	journaltitle = {Proceedings of {TREC} 2003},
+	author = {Voorhees, Ellen M},
+	date = {2004},
+	langid = {english},
+	file = {Voorhees - Overview of the TREC 2003 Question Answering Track.pdf:/Users/soboroff/Zotero/storage/7QTJGH5X/Voorhees - Overview of the TREC 2003 Question Answering Track.pdf:application/pdf}
+}
+
+@inproceedings{lin_evaluating_2005,
+	location = {Ann Arbor, Michigan},
+	title = {Evaluating Summaries and Answers: Two Sides of the Same Coin?},
+	url = {https://www.aclweb.org/anthology/W05-0906},
+	shorttitle = {Evaluating Summaries and Answers},
+	pages = {41--48},
+	booktitle = {Proceedings of the {ACL} Workshop on Intrinsic and Extrinsic Evaluation Measures for Machine Translation and/or Summarization},
+	publisher = {Association for Computational Linguistics},
+	author = {Lin, Jimmy and Demner-Fushman, Dina},
+	urldate = {2021-02-05},
+	date = {2005-06},
+	file = {Full Text PDF:/Users/soboroff/Zotero/storage/VZHUC5J9/Lin and Demner-Fushman - 2005 - Evaluating Summaries and Answers Two Sides of the.pdf:application/pdf}
+}
+
+@inproceedings{soboroff_novelty_2005,
+	location = {Vancouver, British Columbia, Canada},
+	title = {Novelty Detection: The {TREC} Experience},
+	url = {https://www.aclweb.org/anthology/H05-1014},
+	shorttitle = {Novelty Detection},
+	eventtitle = {{EMNLP}-{HLT} 2005},
+	pages = {105--112},
+	booktitle = {Proceedings of Human Language Technology Conference and Conference on Empirical Methods in Natural Language Processing},
+	publisher = {Association for Computational Linguistics},
+	author = {Soboroff, Ian and Harman, Donna},
+	urldate = {2021-02-05},
+	date = {2005-10},
+	file = {Full Text PDF:/Users/soboroff/Zotero/storage/QZLAKK2L/Soboroff and Harman - 2005 - Novelty Detection The TREC Experience.pdf:application/pdf}
+}
+
+@Article{lesk-salton-1969,
+  author =       {Michael E. Lesk and Gerard Salton},
+  title =        {Relevance Assessments and Retrieval System Evaluation},
+  journal =      {Information Storage and Retrieval},
+  year =         1969,
+  volume =    4,
+  pages =     {343--359}}
+
+@inproceedings{bailey-user-variability,
+author = {Bailey, Peter and Moffat, Alistair and Scholer, Falk and Thomas, Paul},
+title = {User Variability and IR System Evaluation},
+year = {2015},
+isbn = {9781450336215},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/2766462.2767728},
+doi = {10.1145/2766462.2767728},
+pages = {625–634},
+numpages = {10},
+keywords = {relevance measures, test collections, user behavior},
+location = {Santiago, Chile},
+series = {SIGIR '15}
+}
+
+@inproceedings{bailey-uqv-100,
+author = {Bailey, Peter and Moffat, Alistair and Scholer, Falk and Thomas, Paul},
+title = {UQV100: A Test Collection with Query Variability},
+year = {2016},
+isbn = {9781450340694},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/2911451.2914671},
+doi = {10.1145/2911451.2914671},
+pages = {725–728},
+numpages = {4},
+keywords = {user variability, trec, test collection, information retrieval, information need, clueweb, backstory},
+location = {Pisa, Italy},
+series = {SIGIR '16}
+}
+
+@inproceedings{robertson_topic_variance,
+author = {Robertson, Stephen E. and Kanoulas, Evangelos},
+title = {On per-topic variance in IR evaluation},
+year = {2012},
+isbn = {9781450314725},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/2348283.2348402},
+doi = {10.1145/2348283.2348402},
+pages = {891–900},
+numpages = {10},
+keywords = {statistical precision, simulation, significance testing, mixed-effects model, information retrieval, evaluation},
+location = {Portland, Oregon, USA},
+series = {SIGIR '12}
+}
+
+@article{banks-over,
+author = {Banks, David and Over, Paul and Zhang, Nien-Fan},
+title = {Blind Men and Elephants: Six Approaches to TREC data},
+year = {1999},
+issue_date = {Apr 1999},
+publisher = {Kluwer Academic Publishers},
+address = {USA},
+volume = {1},
+number = {1–2},
+issn = {1386-4564},
+url = {https://doi.org/10.1023/A:1009984519381},
+doi = {10.1023/A:1009984519381},
+journal = {Inf. Retr.},
+month = {may},
+pages = {7–34},
+numpages = {28},
+keywords = {cluster analysis, multidimensional scaling, rank correlation}
+}
+
+@inproceedings{intent-1,
+author = {Ruihua Song and Min Zhang and Tetsuya Sakai and Makoto Kato and Yiqun Liu and Miho Sugimoto and Qinglei Wang and Naoki Orii},
+title = {Overview of the {NTCIR-9} {INTENT} Task},
+year = {2011},
+series = {NTCIR-9}}
+
+@inproceedings{intent-2,
+author = {Tetsuya Sakai and Zhicheng Dou and Takehiro Yamamoto and Yiqun Liu and Min Zhang and Ruihua Song},
+title = {Overview of the {NTCIR-10} {INTENT-2} Task},
+year = {2013},
+series = {NTCIR-10}}
+
+@inproceedings{imine-1,
+    author = {Yiqun Liu and Ruihua Song and Min Zhang and Zhicheng Dou and Takehiro Yamamoto and Makoto Kato and Hiroaki Ohshima and Ke Zhou},
+    title = {Overview of the NTCIR-11 IMine Task},
+    series = {NTCIR-11},
+    year = {2015}
+}
+
+
+@inproceedings{imine-2,
+    author = {Takehiro Yamamoto and Yiqun Liu and Min Zhang and Zhicheng Dou and Ke Zhou and Ilya Markov and Makoto P. Kato and Hiroaki Ohshima and Sumio Fujita},
+    title = {Overview of the NTCIR-12 IMine-2 Task},
+    series = {NTCIR-12},
+    year = {2017}
+}
+
+@inproceedings{trec-web-2009,
+    author = {Charles L. A. Clarke and Nick Craswell and Ian Soboroff},
+    editor = {Ellen M. Voorhees and Lori P. Buckland},
+    title = {Overview of the {TREC} 2009 Web Track},
+    booktitle = {TREC 2009},
+    year = {2009},
+    timestamp = {Thu, 12 Mar 2020 00:00:00 +0100},
+    biburl = {https://dblp.org/rec/conf/trec/ClarkeCS09.bib},
+    bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@inproceedings{trec-web-2010,
+    author = {Charles L. A. Clarke and Nick Craswell and Ian Soboroff and Gordon V. Cormack},
+    editor = {Ellen M. Voorhees and Lori P. Buckland},
+    title = {Overview of the {TREC} 2010 Web Track},
+    booktitle = {TREC 2010},
+    year = {2010},
+    url = {https://trec.nist.gov/pubs/trec19/papers/WEB.OVERVIEW.pdf},
+    timestamp = {Wed, 03 Feb 2021 00:00:00 +0100},
+    biburl = {https://dblp.org/rec/conf/trec/ClarkeCSC10.bib},
+    bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@inproceedings{trec-web-2011,
+    author = {Charles L. A. Clarke and Nick Craswell and Ian Soboroff and Ellen M. Voorhees},
+    editor = {Ellen M. Voorhees and Lori P. Buckland},
+    title = {Overview of the {TREC} 2011 Web Track},
+    booktitle = {TREC 2011},
+    year = {2011},
+    url = {http://trec.nist.gov/pubs/trec20/papers/WEB.OVERVIEW.pdf},
+    timestamp = {Thu, 12 Mar 2020 00:00:00 +0100},
+    biburl = {https://dblp.org/rec/conf/trec/ClarkeCSV11.bib},
+    bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@inproceedings{trec-web-2012,
+    author = {Charles L. A. Clarke and Nick Craswell and Ellen M. Voorhees},
+    editor = {Ellen M. Voorhees and Lori P. Buckland},
+    title = {Overview of the {TREC} 2012 Web Track},
+    booktitle = {{TREC} 2012},
+    year = {2012},
+    url = {http://trec.nist.gov/pubs/trec21/papers/WEB12.overview.pdf},
+    timestamp = {Thu, 12 Mar 2020 00:00:00 +0100},
+    biburl = {https://dblp.org/rec/conf/trec/ClarkeCV12.bib},
+    bibsource = {dblp computer science bibliography, https://dblp.org}
+}
