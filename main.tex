@@ -26,12 +26,12 @@
 
 %%
 % Book metadata
-\title{Building Test Collections for Information Retrieval Experiments}
+\title{Building Test Collections for\\
+Information Retrieval Experiments}
 \author[Ian Soboroff]{Ian M. Soboroff}
 
 
 %\usepackage{microtype}
-
 \usepackage{hyphenat}
 \usepackage[utf8]{inputenc}
 \usepackage[
@@ -107,15 +107,8 @@
 % Creative Commons icons
 \usepackage{ccicons}
 
-% Set up the spacing using fontspec features
-%\renewcommand\allcapsspacing[1]{{\addfontfeature{LetterSpace=15}#1}}
-%\renewcommand\smallcapsspacing[1]{{\addfontfeature{LetterSpace=10}#1}}
-
-\usepackage{color, soul}
-\newcommand{\todo}[1]{\marginnote{\hl{TODO #1}}}
-
 \begin{document}
-  
+
 % Front matter
 \frontmatter
 
@@ -236,7 +229,7 @@ TREC and its offspring are large community-driven evaluation activities out of w
 
 While it wasn't the first test collection ever, the first test collections that most people know about are the Cranfield collections.  Built by Cyril Cleverdon at the Cranfield College of Aeronautics (now Cranfield University) in England, the goal was to measure the effectiveness of different ways of indexing documents for search.
 
-PLACEHOLDER Donna's upcoming book details the history of test collections in wonderful detail.  Afternote, I think the book I mean here is Donna's ``Information Retrieval: The Early Years'' which was a 2019 FnTIR monograph.
+PLACEHOLDER Donna's upcoming book details the history of test collections in wonderful detail.
 
 PLACEHOLDER Karen's ideal test collection.  It was a many-splendored thing, but one part that was in there was pooling.
 
@@ -257,7 +250,7 @@ In contrast to a laboratory experiment on a test collection, we can study users 
 
 User studies observe behavior in a strongly controlled setting.  For example, two variations on a ranking algorithm can be applied as experimental conditions.  Users are asked to perform a task, and observations of the user interaction are made such that the experimenter can compare the experimental conditions --- following our example, whether one ranker or the other has an effect on the number of relevant items the user could find in a fixed amount of time.  In 2009, Diane Kelly published the definitive monograph on the history and practice of user studies in information retrieval.\autocite{kelly_methods_2009}
 
-Web-based search systems made it possible for the provider of the search engine to collect observations of user behavior: what was typed, what was clicked, time spent between events, backtracking actions, scrolling actions, and more.  Early successes and failures of raw click-through rates led researchers to eye-tracking studies and more complex metrics.  As of this writing, the methodologies of interleaving and A/B testing are the most strongly developed for conducting online experiments.\autocite{kohavi_trustworthy_2020}  Experiences in the TREC Open Search track suggest that the effectiveness of interleaving is limited by the traffic on the site.  This might present something of a chicken-and-egg problem for online experiments: no one will use a poor search tool if a better one exists, but you can't make the poor tool better through online experiments unless people are using it.
+Web-based search systems made it possible for the provider of the search engine to collect observations of user behavior: what was typed, what was clicked, time spent between events, backtracking actions, scrolling actions, and more.  Early successes and failures of raw click-through rates led researchers to eye-tracking studies and more complex metrics.  As of this writing, the methodologies of interleaving and A/B testing are the most strongly developed for conducting online experiments.  Experiences in the TREC Open Search track suggest that the effectiveness of interleaving is limited by the traffic on the site.  This might present something of a chicken-and-egg problem for online experiments: no one will use a poor search tool if a better one exists, but you can't make the poor tool better through online experiments unless people are using it.
 
 In 2001, Andrew Turpin and Bill Hersh published a paper with a title that was a sure-fire argument starter: ``Why Batch and User Evaluations Do Not Give The Same Results''.\autocite{turpin_why_2001}   The paper amply illustrates the complexity in aligning offline and online experiments and has been taken by some as a critique of the test collection methodology.  I would prefer to ask a better question: when batch experiments, user studies, and online experiments do not agree, can we identify the source of the disagreement?  In Turpin and Hersh's paper, they found that while systems with better mean average precision did help actual users, users with the poorer system were still able to complete tasks because most users would issue multiple queries rather than look deeply into a ranking.  This points to a mismatch between the batch metric (MAP) and the online metric (task completion), as well as a mismatch in the experimental setup.  
 
@@ -296,7 +289,6 @@ To elicit those questions, Cleverdon followed this procedure.  He selected a gro
 \end{enumerate}
 
 This was a process of back-fitting queries to documents.  Back-fitting is a problematic approach because the queries are inherently tuned to a specific document, whereas in informational searches the searcher is usually looking for a new document.  The result is that the collection predicts higher precision than you would see from topics that came from users. 
-
 Cleverdon had to take an approach that started from documents, because he reasoned that all documents in the collection needed to be reviewed with respect to each query, and it was infeasible to manually assess very many documents in total.
 To overcome the precision bias, Cleverdon asked the authors to frame the paper's research questions as searches, and then to decide if the citations were relevant or not to the questions.
 
@@ -338,7 +330,7 @@ Because of that context, certain kinds of relevant information are more useful t
 
 As the user is reading, their notion of relevance changes.  Again, the example of tracking duplicate information is germane here, but in any event the user is learning as they read, no matter the form the relevant information takes.  User's judgments of relevance are modified by encounters with {\em irrelevant} information: often there are corner cases of relevance where the user has to make a decision about whether to keep something in or leave something out, and the act of making those decisions can change the boundaries of relevance.  Leave aside for now the generation of new search topics (and hence new queries) from the experience of reading: even within a single search ``instance'' with a relatively bound need the scope of relevance evolves as the user reads.
 
-Because of that evolution in relevance, the user's assumptions of how deeply they will explore the present ranked list evolve as well.  Trivially we would expect even the most tenacious user to stop reading when (or if) the documents in the ranked list seem to provide no more relevant information.  But when does that happen?  What does ``no more relevant information'' mean and how does the user understand it, both in the context of the current ranked list and for further searches?
+Because of that evolution in relevance, the user's assumptions of how deeply they will explore the present ranked list evolve as well.  Trivially we would expect even the most tenacious user to stop reading when (or if) the documents in the ranked list seem to provide no more relevant information.  But when does that happen?  What does "no more relevant information" mean and how does the user understand it, both in the context of the current ranked list and for further searches?
 
 Nobody just does one search.  Users are much more likely to issue a second search query than to proceed to the second page of results from a web search~\autocite{ref-missing}.  This seems to be a combination of the speed of search along with expectations that the  relevant information is more likely to be found at the top of a new ranked list rather than past rank 10 in the current one.  So to look at a single ranked list from a single query is very limiting.
 
@@ -349,7 +341,7 @@ All of these observations stem trivially from taking a moment's time to reflect 
     \item Relevance, and indeed the user's entire information need, is static through the entire ranked list.
     \item The user is going to read that entire list, or at any rate significantly more than reasonable experience should lead us to think.
 \end{enumerate}
-This list of simplifications isn't exhaustive.  I haven't even touched on the issue that in most cases the document collection is a dynamic, changing, growing thing.  Even if a document has relevant information in it, that information isn't equally accessible in every document: some documents are hard to read, some are very long, some are very complex.  The user has only a limited amount of time to explore this search and probably others.  Some documents might be restricted from access by paywalls or security concerns.  And so forth, and so forth.
+This list of simplifications isn't exhaustive.  We haven't even touched on the issue that in most cases the document collection is a dynamic, changing, growing thing.  Even if a document has relevant information in it, that information isn't equally accessible in every document: some documents are hard to read, some are very long, some are very complex.  The user has only a limited amount of time to explore this search and probably others.  Some documents might be restricted from access by paywalls or security concerns.  And so forth, and so forth.
 
 The point is that the adhoc task is an {\em abstraction} of the real user task.  Although I emphasized quite a bit above that we are concerned with the tasks of real people as they search for information, in order to conduct experiments around those tasks we need to construct a task abstraction, to simplify aspects of reality that are too complicated to manage in the experiment, or which might otherwise distract the experiment in nonessential details.  It's not that all those details aren't interesting or don't deserve to be the focus of their own experiments.  It's that we have to draw a simplifying boundary around the task, within which we can define the interaction that takes place, in such a way that we can measure it simply and repeatably.
 
@@ -365,7 +357,7 @@ The definition of the task is what drives the selection of the primary metric fo
 
 The development of the adhoc task mirrors the development of understanding of precision, recall, and the relationship between them.  In particular, the recall-precision curve and the TREC definition of average precision are driven by the adhoc task concept.  Because the user will progress through the ranked list, recall must increase, although along the way the user will no doubt throw out many irrelevant documents, so precision will decrease as recall improves.  What is the rate of that trade-off?  The recall-precision curve illustrates it.  By showing precision at standardized percentages of recall, topics with different numbers of relevant documents can be compared.  Average precision is the area under the curve, hence a single-number summary of the recall-precision curve.
 
-Many other metrics have been proposed for informational search tasks, including discounted cumulative gain, rank-biased precision, and expected reciprocal rank.  Each bakes in a different set of assumptions about how the user is proceeding through the ranked list, and how relevance is traded off against effort.  In appropriate parameter settings, all of these measures correlate strongly, so another way to think of their differences is in terms of the parameter settings that make them different from one another.  For example, nDCG with uniform gains and a geometric discount is equivalent to average precision, as is rank-biased precision with a $\beta$ parameter of 0.99.  The definition of the task may imply different notions of gain, effort, or time, and hence changes in the metric or in its parameters.
+Many other metrics have been proposed for informational search tasks, including discounted cumulative gain, rank-biased precision, and expected reciprocal rank.  Each bakes in a different set of assumptions about how the user is proceeding through the ranked list, and how relevance is traded off against effort.  In appropriate parameter settings, all of these measures correlate strongly, so another way to think of their differences is in terms of the parameter settings that make them different from one another.  For example, NDCG with uniform gains and a geometric discount is equivalent to average precision, as is rank-biased precision with a $\beta$ parameter of 0.99.  The definition of the task may imply different notions of gain, effort, or time, and hence changes in the metric or in its parameters.
 
 Another family of tasks are those where there is only one correct answer, or relevant document, or where the user only requires a single relevant document, or where for some other reason the user will stop reading the ranked list after the first relevant document is found.  A common metric for those tasks is reciprocal rank, although rank-biased precision with a very low $\beta$ would be equivalent.
 
@@ -448,7 +440,7 @@ When we build a test collection, we will spend a considerable amount of time and
 
 Recall that I have already stressed the importance of taking steps back from reality when defining the task.  The test collection itself is an idealized scenario, with a number of assumptions made explicit so that we can conduct quantitative experiments on systems with data.  So while we are abstracting the task, we will also be abstracting relevance along with it.
 
-The key point is that relevance is what the user wants (or needs) to find in order to be successful.  Hence, the task construct is essential in defining relevance for the test collection: the task defines what the user is trying to accomplish, and relevance describes the artifacts uncovered during the search that allow the user to complete the task.  The TREC adhoc task is a general informational search where the user wants to find any and all information about their topic.  As I will discuss in the next chapter, TREC adhoc uses a very minimalistic operationalization of relevance, which is that any information in the document about the topic, no matter how small or whether it is already known, is relevant.  This is what is implied by ``any and all'' in the task construct.  This is the general guideline from the task; individual topics in TREC usually define boundaries on ``aboutness'' for that topic, and subject to those locally-scoped constraints, the general guideline holds for all topics in the collection.
+The key point is that relevance is what the user wants (or needs) to find in order to be successful.  Hence, the task construct is essential in defining relevance for the test collection: the task defines what the user is trying to accomplish, and relevance describes the artifacts uncovered during the search that allow the user to complete the task.  The TREC adhoc task is a general informational search where the user wants to find any and all information about their topic.  As I will discuss in the next chapter, TREC adhoc uses a very minimalistic operationalization of relevance, which is that any information in the document about the topic, no matter how small or whether it is already known, is relevant.  This is what is implied by "any and all" in the task construct.  This is the general guideline from the task; individual topics in TREC usually define boundaries on ``aboutness'' for that topic, and subject to those locally-scoped constraints, the general guideline holds for all topics in the collection.
 
 There is nothing (or very little) about this instantiation of relevance that is essential to being able to build a test collection.  We can in fact define relevance to be nearly anything we want it to be, as long as the presence of relevance in documents is what leads the user to task success, and people can reliably determine when a document is relevant as relevance has been defined.  Some definitions can lead to intractable problems gathering relevance judgments, and again those situations will be covered in the next chapter.
 
@@ -466,7 +458,7 @@ Another survey will go here.  I don't know this literature yet.  What I DON'T wa
 
 \section{Explicit relevance vs implicit relevance}
 
-In discussing relevance, I assume a definition of relevance that can be articulated and made explicit.  Many especially in industry are interested in implicit relevance, that is, being able to observe relevance without the user's explicit relevance judgment.  This is actually an issue with eliciting relevance judgments rather than defining relevance, but since in many cases the notion of ``task'' is also vague and implicit, it bears mentioning here as well as in the next chapter.
+In discussing relevance, I assume a definition of relevance that can be articulated and made explicit.  Many especially in industry are interested in implicit relevance, that is, being able to observe relevance without the user's explicit relevance judgment.  This is actually an issue with eliciting relevance judgments rather than defining relevance, but since in many cases the notion of "task" is also vague and implicit, it bears mentioning here as well as in the next chapter.
 
 Let's take the following approach.  Even if the user doesn't have an explicitly stated task, there is a task context, within which searches take place, and that context {\em could} be written down if we wanted to do so.  Likewise, a user might not explicitly define what it means for a document to be relevant, but nevertheless, if a document is relevant they could articulate the reason if we asked them to.  In designing a test collection, we will have to make some decisions about task and relevance, in order to make meaningful measurements.  Formally articulating the task and defining relevance may feel artificial, because users don't generally do that, but nevertheless, there is a task and relevance can be defined.  We can't measure search without a task context, because there is no framework to understand what it means for a search to be successful or not.  In the same way, we also have to define relevance, because otherwise there is no framework for us to ask users whether a document is relevant or not.
 
